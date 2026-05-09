@@ -164,3 +164,13 @@ for(let i =0; i< length; i++){
 const password = generatePassword(8);
 
 console.log(`Generated password: ${password}`);
+
+function sumAll(array){
+  let min = Math.min(array[0], array[1]);
+  let max = Math.max(array[0], array[1]);
+  let sum = 0;
+for(let i = min; i <= max; i++) {
+  sum += i;
+} return sum;
+}
+console.log(sumAll([1, 4]));
