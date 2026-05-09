@@ -152,3 +152,15 @@ function uniteUnique(...arrays) {
   } return result;
 }
 console.log(uniteUnique([1,3,5], [1,2,4], [5,4,6]));
+
+function generatePassword(length){
+const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+let password = "";
+for(let i =0; i< length; i++){
+  const randomIndex = Math.floor(Math.random() * chars.length);
+   password += chars[randomIndex]
+   } return password;
+}
+const password = generatePassword(8);
+
+console.log(`Generated password: ${password}`);
