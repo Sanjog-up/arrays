@@ -7,8 +7,6 @@ function findFirst(array, func) {
   return undefined;
 }
 console.log(findFirst([1, 2, 3, 4], num => num % 2 === 0)); 
-console.log(findFirst([1, 2, 3, 4], num => num > 5));
-console.log(findFirst([1, 2, 3, 4], num => num < 0));
 console.log(findFirst([1, 2, 3, 4], num => num === 3));
 
 
