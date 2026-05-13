@@ -198,3 +198,153 @@ function convertHTML (str) {
   .replace(/'/g , "&apos;");
   }
   console.log(convertHTML("Dol & Gabb"));
+
+  const playlists = [
+  [
+    {
+      trackId: "trk101",
+      artist: "Velvet Comet",
+      title: "Crimson Afterglow",
+      votes: 5,
+      bpm: 122
+    },
+    {
+      trackId: "trk102",
+      artist: "Neon Harbor",
+      title: "Static Horizon",
+      votes: 2,
+      bpm: 108
+    },
+    {
+      trackId: "trk103",
+      artist: "Lunar Arcade",
+      title: "Midnight Frequency",
+      votes: 4,
+      bpm: 128
+    }
+  ],
+  [
+    {
+      trackId: "trk201",
+      artist: "Solar Echo",
+      title: "Glass Skyline",
+      votes: 3,
+      bpm: 115
+    },
+    {
+      trackId: "trk202",
+      artist: "Velvet Comet",
+      title: "Satellite Hearts",
+      votes: 6,
+      bpm: 124
+    }
+  ]
+];
+function flattenPlaylists(playlists){
+ if(!Array.isArray(playlists))
+  return  [];
+
+const result = [];
+for(let playlistIndex = 0; playlistIndex < playlists.length; playlistIndex++){
+  const playlist = playlists[playlistIndex];
+
+for(let trackIndex= 0; trackIndex < playlist.length; trackIndex++){
+  const track = playlist[trackIndex];
+ result.push({
+  ...track,
+  source: [playlistIndex, trackIndex]
+})
+} 
+} return result;
+}
+
+function scoreTracks(tracks){
+const result = [];
+for(let i = 0; i< tracks.length; i++){
+  const track = tracks[i];
+
+result.push({
+  ...track,
+  score: track.votes * 10 - Math.abs(track.bpm - 120)
+
+});
+} return result;
+}
+
+function dedupeTracks(tracks){
+  let result = [];
+
+  for(let i=0; i< tracks.length; i++){
+    const track = tracks[i];
+let isDupli = false;
+ 
+  for(let j = 0; j< result.length;j++){
+    if(result[j].trackId === track.trackId){
+      isDupli = true;
+    }
+  }
+  if(!isDupli){
+    result.push(track);
+  }
+
+  } return result;
+}
+function enforceArtistQuota(tracks, max){
+const artistCount ={};
+let result = [];
+for(let i =0; i<tracks.length; i++){
+const artist = tracks[i].artist;
+  
+  if(!artistCount[artist]){
+artistCount[artist]= 0;
+  }
+  if(artistCount[artist] < max){
+    result.push(tracks[i]);
+    artistCount[artist]++;
+
+  } return result;
+}
+}
+
+function buildSchedule(tracks){
+  let result = [];
+  for (let i=0; i < tracks.length;i++){
+result.push({
+  slot: i +1,
+  trackId:tracks[i].trackId
+});
+    }return result;
+  }
+
+
+function remixPlaylist(arr, max){
+  const flatt = flattenPlaylists(arr);
+  const score = scoreTracks(flatt);
+  const dedupe = dedupeTracks(score);
+  const enforce = enforceArtistQuota(dedupe, max);
+  const schedule = buildSchedule(enforce);
+  return schedule;
+}
+
+console.log(flattenPlaylists(playlists));
+console.log(dedupeTracks(playlists));
+remixPlaylist(playlists, 2)
+
+function sumFibs(num){
+  if(num < 0) 
+  return 0;
+
+  let sum = 0;
+  let prev =0;
+  let curr = 1;
+  while(curr <=num){
+    if(curr % 2 !== 0){
+      sum+= curr;
+    }
+    let next = prev + curr;
+    prev = curr;
+    curr = next;
+  } 
+  return sum;
+}
+console.log(sumFibs(4));

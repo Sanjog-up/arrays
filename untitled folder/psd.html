@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Password Generator</title>
+    </head>
+    <body>
+        <h1>Password Generator<span>.ai</span></h1>
+
+        <label>PasswordLength</label>
+        <input type = "number" id = "length" value = "12" min ="6">
+
+        <button onclick="createPassword()">
+            Generate password
+        </button> 
+        <h2>Your Pasd:</h2>
+        <p id = "result"></p>
+
+        <button onclick="copyPassword()">Copy</button>
+        <script>
+
+            function generatePassword(length) {
+      const chars =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+
+      let password = "";
+
+      for (let i = 0; i < length; i++) {
+        const randomIndex =
+          Math.floor(Math.random() * chars.length);
+
+        password += chars[randomIndex];
+      }
+
+      return password;
+    }
+
+
+    function createPassword() {
+        const length = document.getElementById("length").value;
+        const password = generatePassword(length);
+
+        document.getElementById("result").innerText = password;
+    }
+
+    function copyPassword(){
+        const text = document.getElementById("result").innerText;
+
+        navigator.clipboard.writeText(text);
+
+        alert("copied");
+    }
+        </script>
+
+
+
+
+
+    </body>
+</html>
