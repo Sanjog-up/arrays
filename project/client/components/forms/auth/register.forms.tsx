@@ -1,17 +1,18 @@
 import Input from '@/components/common/ui/input'
-import React from 'react'
-
+import React from 'react';
+import Link from 'next/link';
 const RegisterForm = () => {
   return (
     <div className='w-full' >
         <form className='flex flex-col gap-4 w-full h-full'>
-            <div className='w-full flex flex-col gap-1'>
+            <Input label='Full_Name' type='name' placeholder='johndoe' id="full_name" name='full_name'/>
+            {/* <div className='w-full flex flex-col gap-1'>
               <label className='text-[15px] font-serif' htmlFor='full-name '>Name
               </label>
               <input id='full-name' 
               className='w-full border-[1.5px]  border-blue-600  px-2 py-2 rounded-sm'
               type='text' placeholder='John Doe'/>
-            </div>
+            </div> */}
         
 
            <Input label='Email' type='text' placeholder='johndoe@gmail.com' id="email" name='name'/>
@@ -51,10 +52,12 @@ const RegisterForm = () => {
             Submit
           </button >
           
+          {/* <Link href="/login">
           <button
           className='w-full bg-amber-50 '>
             already have account
           </button>
+          </Link> */}
 
         </form>
       </div>  

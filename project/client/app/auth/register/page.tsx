@@ -5,6 +5,7 @@ export const metadata: Metadata = {
     title: "Ecom | sign up",
     description:"ecommerce sign up page"
 }
+import Link from 'next/link';
 
 
 const RegisterPage = () => {
@@ -20,7 +21,13 @@ const RegisterPage = () => {
         </div>
 
         <RegisterForm/>
+
+         <div className='text-center -mt-4'>
+        <p>Already have an account? <Link className='italic font-semibold text-blue-800' href={'/auth/login'}>Sign In</Link></p>
       </div>
+      </div>
+
+     
     </main>
   )
 }
