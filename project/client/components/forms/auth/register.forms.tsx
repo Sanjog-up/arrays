@@ -1,11 +1,53 @@
+'use client'
+import Button from '@/components/common/ui/button';
 import Input from '@/components/common/ui/input'
-import React from 'react';
-import Link from 'next/link';
+import React, { useState } from 'react';
+
 const RegisterForm = () => {
+
+  const [full_name, setFullName] = useState('')
+  const [email,setEmail]= useState('')
+  const [password,setPassword]= useState('')
+  const [retypepassword, setRetypePassword]= useState('')
+
+    const onFullNameChange = (e:React.ChangeEvent<HTMLInputElement,HTMLInputElement>)=> {
+    console.log('full_name', e.target.value)
+    setFullName(e.target.value)
+  }
+
+   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement,HTMLInputElement>)=> {
+          console.log('email', e.target.value)
+          setEmail(e.target.value)
+      }
+       
+      const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement,HTMLInputElement>) => {
+          console.log('password', e.target.value)
+          setPassword(e.target.value)
+      }
+
+      const onRetypePasswordChange = (e:React.ChangeEvent<HTMLInputElement,HTMLInputElement>) => {
+          console.log('retype-password', e.target.value)
+          setRetypePassword(e.target.value)
+      }
+
+      const onPhoneNumberChange = (e:React.ChangeEvent<HTMLInputElement,HTMLInputElement>) => {
+          console.log('retype-password', e.target.value)
+          setRetypePassword(e.target.value)
+      }
+
+      const onSubmit = (e:React.SubmitEvent<HTMLFormElement>) => {
+              e.preventDefault()
+              console.log('form data',{
+                  email,
+                  password
+              })
+              // http post /auth/login
+          }
+
   return (
     <div className='w-full' >
         <form className='flex flex-col gap-4 w-full h-full'>
-            <Input label='Full_Name' type='name' placeholder='johndoe' id="full_name" name='full_name'/>
+            <Input onChange={onFullNameChange} label='Full_Name' type='name' placeholder='johndoe' id="full_name" name='full_name'/>
             {/* <div className='w-full flex flex-col gap-1'>
               <label className='text-[15px] font-serif' htmlFor='full-name '>Name
               </label>
@@ -15,7 +57,7 @@ const RegisterForm = () => {
             </div> */}
         
 
-           <Input label='Email' type='text' placeholder='johndoe@gmail.com' id="email" name='name'/>
+           <Input onChange={onEmailChange} label='Email' type='text' placeholder='johndoe@gmail.com' id="email" name='name'/>
           {/* <div className='w-full flex flex-col gap-1'>
             <label className='text-[15px] font-serif' htmlFor='email'>Email
               </label> 
@@ -25,7 +67,7 @@ const RegisterForm = () => {
           </div> */}
 
 
-          <Input label='Password' type='password' placeholder='********' id='password' name='password'/>
+          <Input onChange={onPasswordChange} label='Password' type='password' placeholder='********' id='password' name='password'/>
 
 
 
@@ -37,7 +79,7 @@ const RegisterForm = () => {
             type='text' placeholder='Create Password'/>
           </div> */}
 
-          <Input label='Retype-Password' type='password' placeholder='********' id='c_password' name='c_password'/>
+          <Input onChange={onRetypePasswordChange} label='Retype-Password' type='password' placeholder='********' id='c_password' name='c_password'/>
 
           {/* <div className='w-full flex flex-col gap-1'>
           <label className='text-[15px] font-serif' htmlFor='password'>Username</label>
@@ -47,17 +89,13 @@ const RegisterForm = () => {
           />
           </div> */}
 
-          <button type='submit'
-          className='w-full bg-linear-to-t from-sky-500 to-indigo-500 py-2.5 rounded-sm cursor-pointer text-amber-50 font-bold mt-3'>
-            Submit
-          </button >
-          
-          {/* <Link href="/login">
-          <button
-          className='w-full bg-amber-50 '>
-            already have account
-          </button>
-          </Link> */}
+          <Input label='PhoneNumber' type='number' placeholder='98********' id='phonenumber' name='number' onChange={onPhoneNumberChange}/>
+
+         {/* Button */}
+         <Button
+         label='Sign Up'
+         type='submit'/>
+       
 
         </form>
       </div>  
