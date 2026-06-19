@@ -26,7 +26,7 @@ const RegisterForm = () => {
       }
 
       const onRetypePasswordChange = (e:React.ChangeEvent<HTMLInputElement,HTMLInputElement>) => {
-          console.log('retype-password', e.target.value)
+          console.log('retypepassword', e.target.value)
           setRetypePassword(e.target.value)
       }
 
