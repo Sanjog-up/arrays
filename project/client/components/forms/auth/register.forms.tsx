@@ -2,52 +2,73 @@
 import Button from '@/components/common/ui/button';
 import Input from '@/components/common/ui/input'
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+interface IRegisterForm{
+  full_name:string,
+  email:string,
+  password:string,
+  retype_password:string,
+  phone?: string,
+}
 
 const RegisterForm = () => {
+  // const [full_name, setFullName] = useState('')
+  // const [email,setEmail]= useState('')
+  // const [password,setPassword]= useState('')
+  // const [retypepassword, setRetypePassword]= useState('')
 
-  const [full_name, setFullName] = useState('')
-  const [email,setEmail]= useState('')
-  const [password,setPassword]= useState('')
-  const [retypepassword, setRetypePassword]= useState('')
+  //   const onFullNameChange = (e:React.ChangeEvent<HTMLInputElement,HTMLInputElement>)=> {
+  //   console.log('full_name', e.target.value)
+  //   setFullName(e.target.value)
+  // }
 
-    const onFullNameChange = (e:React.ChangeEvent<HTMLInputElement,HTMLInputElement>)=> {
-    console.log('full_name', e.target.value)
-    setFullName(e.target.value)
-  }
-
-   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement,HTMLInputElement>)=> {
-          console.log('email', e.target.value)
-          setEmail(e.target.value)
-      }
+  //  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement,HTMLInputElement>)=> {
+  //         console.log('email', e.target.value)
+  //         setEmail(e.target.value)
+  //     }
        
-      const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement,HTMLInputElement>) => {
-          console.log('password', e.target.value)
-          setPassword(e.target.value)
-      }
+  //     const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement,HTMLInputElement>) => {
+  //         console.log('password', e.target.value)
+  //         setPassword(e.target.value)
+  //     }
 
-      const onRetypePasswordChange = (e:React.ChangeEvent<HTMLInputElement,HTMLInputElement>) => {
-          console.log('retypepassword', e.target.value)
-          setRetypePassword(e.target.value)
-      }
+  //     const onRetypePasswordChange = (e:React.ChangeEvent<HTMLInputElement,HTMLInputElement>) => {
+  //         console.log('retypepassword', e.target.value)
+  //         setRetypePassword(e.target.value)
+  //     }
 
-      const onPhoneNumberChange = (e:React.ChangeEvent<HTMLInputElement,HTMLInputElement>) => {
-          console.log('retype-password', e.target.value)
-          setRetypePassword(e.target.value)
-      }
+  //     const onPhoneNumberChange = (e:React.ChangeEvent<HTMLInputElement,HTMLInputElement>) => {
+  //         console.log('retype-password', e.target.value)
+  //         setRetypePassword(e.target.value)
+  //     }
 
-      const onSubmit = (e:React.SubmitEvent<HTMLFormElement>) => {
-              e.preventDefault()
-              console.log('form data',{
-                  email,
-                  password
-              })
+  const { register, handleSubmit} = useForm({
+    defaultValues:{
+      full_name:"",
+      email:"",
+      password:"",
+      retype_password:"",
+      number:""
+    }
+  });
+
+      const onSubmit = (data:IRegisterForm) => {
+              console.log('form data',data)
               // http post /auth/login
           }
 
   return (
     <div className='w-full' >
-        <form className='flex flex-col gap-4 w-full h-full'>
-            <Input onChange={onFullNameChange} label='Full_Name' type='name' placeholder='johndoe' id="full_name" name='full_name'/>
+        <form 
+        onSubmit={handleSubmit(onSubmit)}
+        className='flex flex-col gap-4 w-full h-full'>
+            <Input register={register}
+             label='Full_Name' 
+             type='name' 
+             placeholder='johndoe' 
+             id="full_name" 
+             name='full_name'/>
             {/* <div className='w-full flex flex-col gap-1'>
               <label className='text-[15px] font-serif' htmlFor='full-name '>Name
               </label>
@@ -57,7 +78,7 @@ const RegisterForm = () => {
             </div> */}
         
 
-           <Input onChange={onEmailChange} label='Email' type='text' placeholder='johndoe@gmail.com' id="email" name='name'/>
+           <Input register={register} label='Email' type='text' placeholder='johndoe@gmail.com' id="email" name='name'/>
           {/* <div className='w-full flex flex-col gap-1'>
             <label className='text-[15px] font-serif' htmlFor='email'>Email
               </label> 
@@ -67,7 +88,7 @@ const RegisterForm = () => {
           </div> */}
 
 
-          <Input onChange={onPasswordChange} label='Password' type='password' placeholder='********' id='password' name='password'/>
+          <Input register={register} label='Password' type='password' placeholder='********' id='password' name='password'/>
 
 
 
@@ -79,7 +100,7 @@ const RegisterForm = () => {
             type='text' placeholder='Create Password'/>
           </div> */}
 
-          <Input onChange={onRetypePasswordChange} label='Retype-Password' type='password' placeholder='********' id='c_password' name='c_password'/>
+          <Input register={register} label='Retype-Password' type='password' placeholder='********' id='c_password' name='c_password'/>
 
           {/* <div className='w-full flex flex-col gap-1'>
           <label className='text-[15px] font-serif' htmlFor='password'>Username</label>
@@ -89,7 +110,7 @@ const RegisterForm = () => {
           />
           </div> */}
 
-          <Input label='PhoneNumber' type='number' placeholder='98********' id='phonenumber' name='number' onChange={onPhoneNumberChange}/>
+          <Input label='PhoneNumber' type='number'  placeholder='98********' id='phonenumber' name='number' register={register}/>
 
          {/* Button */}
          <Button
