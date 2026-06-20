@@ -1,39 +1,27 @@
-// "use client";
+"use client";
 
-// import Link from "next/link";
-// import { usePathname } from "next/navigation";
-// import path from "path";
+import Link from "next/link";
+import React from 'react'
 
-// const navLinks = [
-//   { href: "/", label: "Home" },
-//   { href: "/about", label: "About" },
-// ];
+const Header = () => {
+  return (
+    <main>
+        <nav className="flex  items-center justify-between px-6 py-4 rounded-sm hover:bg-blue-300">
+            <p className="whitespace-nowrap w-full text-2xl">Grey Matter</p>
 
-// const Pathname = () => {
+            <div className="flex items-center gap-3">
+            <Link href={"/"} className='italic font-semibold text-blue-800 px-2 py-2 whitespace-nowrap' >Home</Link>
+            <Link href={"/products"} className="italic font-semibold text-blue-800 px-2 py-2">Products</Link>
+            <Link href={"/about"} className="italic font-semibold text-blue-800 px-2 py-2 whitespace-nowrap">About Us</Link>
+            <Link href={"/contact"} className="italic font-semibold text-blue-800 px-2 py-2 whitespace-nowrap">Contact Us</Link>
+          </div>
 
-//   return (
-//     <header className="w-full border-b border-indigo-100">
-//       <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
-//         <Link href="/" className="text-lg font-bold tracking-wide text-indigo-700">
-//           Ecom
-//         </Link>
-//         <div className="flex gap-6">
-//           {navLinks.map((link) => (
-//             <Link
-//               key={link.href}
-//               href={link.href}
-//               className={`text-sm font-medium transition-colors ${
-//                 Pathname = link.href
-//                   ? "text-indigo-700 underline"
-//                   : "text-gray-600 hover:text-indigo-700"
-//               }`}
-//             >
-//               {link.label}
-//             </Link>
-//           ))}
-//         </div>
-//       </nav>
-//     </header>
-//   );
-// }
-// }
+          <Link href={"/auth/login"}
+          className=" bg-blue-400 text-amber-50 font-semibold px-5 py-2 rounded-lg whitespace-nowrap">Login</Link>
+        </nav>
+
+    </main>
+  )
+}
+
+export default Header

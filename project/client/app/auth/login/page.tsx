@@ -6,13 +6,16 @@ export const metadata: Metadata = {
     description:"ecommerce sign in page"
 }
 import Link from 'next/link';
+import Header from '@/components/layout/header';
 
 
 const LoginPage = () => {
   return (
     
         <main className='h-full w-full flex justify-center items-center border'>
+         
       {/* page content */}
+
       
       <div className='min-h-80 min-w-80 border border-indigo-500 p-4 rounded-md shadow-xl shadow-indigo-200 flex flex-col gap-6'>
         {/* form heading */}
