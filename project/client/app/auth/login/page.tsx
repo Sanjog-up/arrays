@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import React from 'react';
-import LoginForm from '@/components/forms/auth/login.form';
+import {LoginForm} from '@/components/forms/auth/login.form';
 export const metadata: Metadata = {
     title: "Ecom | sigin",
     description:"ecommerce sign in page"

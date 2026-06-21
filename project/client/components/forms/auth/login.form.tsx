@@ -2,10 +2,14 @@
 
 import Button from '@/components/common/ui/button';
 import Input from '@/components/common/ui/input';
+import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { CgPassword } from 'react-icons/cg';
+import LoginSchema from '@/schema/auth.schema';
 
-const LoginForm = () => {
+export const LoginForm = () =>{
+
 
     // const[email,setEmail]= useState('')
     // const[password, setPassword]= useState('')
@@ -21,12 +25,16 @@ const LoginForm = () => {
     // }
 
 
-    const {register, handleSubmit} = useForm({
+ const {register, handleSubmit, formState:{errors,  }} = useForm({
         defaultValues:{
             email: "",
             password: ""
-        }
+        },
+        resolver: yupResolver(LoginSchema)
     })
+ 
+
+    console.log(errors)
 
     // const onEmailChange = (e: React.ChangeEvent<HTMLInputElement,HTMLInputElement>)=> {
     //     console.log('email', e.target.value)
@@ -56,6 +64,8 @@ const LoginForm = () => {
                 label={'Email'}
                 id='email'
                 placeholder='johndoe@gmail.com'
+                required
+                error={errors?.email?.message}
                 type='text'/>
 
 
@@ -75,7 +85,10 @@ const LoginForm = () => {
                 label='Password'
                 placeholder='******'
                 id='password'
-                type='password'/>
+                required
+                type='password'
+                error={errors?.password?.message}
+                />
     
                 {/* <button 
                 type='submit'
@@ -87,6 +100,6 @@ const LoginForm = () => {
                 label='Sign In'
                 type='submit'/>
                         </form>
-</div>)}
+</div>
 
-export default LoginForm;
+                )}

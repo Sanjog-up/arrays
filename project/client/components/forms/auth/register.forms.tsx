@@ -1,6 +1,8 @@
 'use client'
 import Button from '@/components/common/ui/button';
 import Input from '@/components/common/ui/input'
+import { RegisterSchema } from '@/schema/auth.schema';
+import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -43,14 +45,14 @@ const RegisterForm = () => {
   //         setRetypePassword(e.target.value)
   //     }
 
-  const { register, handleSubmit} = useForm({
+  const { register, handleSubmit, formState:{errors} = useForm({
     defaultValues:{
       full_name:"",
       email:"",
       password:"",
       retype_password:"",
       number:""
-    }
+    },resolver:yupResolver(RegisterSchema)
   });
 
       const onSubmit = (data:IRegisterForm) => {
@@ -68,6 +70,7 @@ const RegisterForm = () => {
              type='name' 
              placeholder='johndoe' 
              id="full_name" 
+             required
              name='full_name'/>
             {/* <div className='w-full flex flex-col gap-1'>
               <label className='text-[15px] font-serif' htmlFor='full-name '>Name
@@ -78,7 +81,8 @@ const RegisterForm = () => {
             </div> */}
         
 
-           <Input register={register} label='Email' type='text' placeholder='johndoe@gmail.com' id="email" name='name'/>
+           <Input register={register} label='Email' type='text' placeholder='johndoe@gmail.com' id="email" name='name'
+           required/>
           {/* <div className='w-full flex flex-col gap-1'>
             <label className='text-[15px] font-serif' htmlFor='email'>Email
               </label> 
@@ -88,7 +92,8 @@ const RegisterForm = () => {
           </div> */}
 
 
-          <Input register={register} label='Password' type='password' placeholder='********' id='password' name='password'/>
+          <Input register={register} label='Password' type='password' placeholder='********' id='password'
+          required name='password'/>
 
 
 
@@ -100,7 +105,8 @@ const RegisterForm = () => {
             type='text' placeholder='Create Password'/>
           </div> */}
 
-          <Input register={register} label='Retype-Password' type='password' placeholder='********' id='c_password' name='c_password'/>
+          <Input register={register} label='Retype-Password' type='password' placeholder='********' id='c_password' 
+          required name='c_password'/>
 
           {/* <div className='w-full flex flex-col gap-1'>
           <label className='text-[15px] font-serif' htmlFor='password'>Username</label>
@@ -110,7 +116,7 @@ const RegisterForm = () => {
           />
           </div> */}
 
-          <Input label='PhoneNumber' type='number'  placeholder='98********' id='phonenumber' name='number' register={register}/>
+          <Input label='PhoneNumber' type='number' placeholder='98********' id='phonenumber' name='number' register={register}/>
 
          {/* Button */}
          <Button
