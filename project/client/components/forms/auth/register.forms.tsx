@@ -5,14 +5,15 @@ import { RegisterSchema } from '@/schema/auth.schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { TRegisterInput } from '@/types/auth.types';
 
-interface IRegisterForm{
-  full_name:string,
-  email:string,
-  password:string,
-  retype_password:string,
-  phone?: string,
-}
+// interface IRegisterInput{
+//   full_name:string,
+//   email:string,
+//   password:string,
+//   retype_password:string,
+//   phone?: string,
+// }
 
 const RegisterForm = () => {
   // const [full_name, setFullName] = useState('')
@@ -45,17 +46,17 @@ const RegisterForm = () => {
   //         setRetypePassword(e.target.value)
   //     }
 
-  const { register, handleSubmit, formState:{errors} = useForm({
+  const { register, handleSubmit, formState:{errors} } = useForm({
     defaultValues:{
       full_name:"",
       email:"",
       password:"",
-      retype_password:"",
-      number:""
+      retype_pass:"",
+      phone:"",
     },resolver:yupResolver(RegisterSchema)
   });
 
-      const onSubmit = (data:IRegisterForm) => {
+      const onSubmit = (data:TRegisterInput) => {
               console.log('form data',data)
               // http post /auth/login
           }
@@ -116,7 +117,7 @@ const RegisterForm = () => {
           />
           </div> */}
 
-          <Input label='PhoneNumber' type='number' placeholder='98********' id='phonenumber' name='number' register={register}/>
+          <Input label='PhoneNumber' type='text' placeholder='98********' id='phonenumber' name='number' register={register}/>
 
          {/* Button */}
          <Button

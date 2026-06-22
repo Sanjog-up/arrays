@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { CgPassword } from 'react-icons/cg';
-import LoginSchema from '@/schema/auth.schema';
+import {LoginSchema} from '@/schema/auth.schema';
 
 export const LoginForm = () =>{
 
