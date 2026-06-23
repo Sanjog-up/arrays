@@ -53,6 +53,7 @@ const RegisterForm = () => {
       password:"",
       retype_pass:"",
       phone:"",
+    
     },resolver:yupResolver(RegisterSchema)
   });
 
@@ -72,6 +73,7 @@ const RegisterForm = () => {
              placeholder='johndoe' 
              id="full_name" 
              required
+             error={errors?.full_name?.message}
              name='full_name'/>
             {/* <div className='w-full flex flex-col gap-1'>
               <label className='text-[15px] font-serif' htmlFor='full-name '>Name
@@ -82,7 +84,9 @@ const RegisterForm = () => {
             </div> */}
         
 
-           <Input register={register} label='Email' type='text' placeholder='johndoe@gmail.com' id="email" name='name'
+           <Input register={register} label='Email' type='text' placeholder='johndoe@gmail.com' 
+            error={errors?.email?.message}
+           id="email" name='name'
            required/>
           {/* <div className='w-full flex flex-col gap-1'>
             <label className='text-[15px] font-serif' htmlFor='email'>Email
@@ -94,7 +98,9 @@ const RegisterForm = () => {
 
 
           <Input register={register} label='Password' type='password' placeholder='********' id='password'
-          required name='password'/>
+          required 
+           error={errors?.password?.message}
+          name='password'/>
 
 
 
@@ -107,7 +113,9 @@ const RegisterForm = () => {
           </div> */}
 
           <Input register={register} label='Retype-Password' type='password' placeholder='********' id='c_password' 
-          required name='c_password'/>
+          required
+           error={errors?.retype_pass?.message}
+          name='c_password'/>
 
           {/* <div className='w-full flex flex-col gap-1'>
           <label className='text-[15px] font-serif' htmlFor='password'>Username</label>
@@ -117,7 +125,9 @@ const RegisterForm = () => {
           />
           </div> */}
 
-          <Input label='PhoneNumber' type='text' placeholder='98********' id='phonenumber' name='number' register={register}/>
+          <Input label='PhoneNumber' type='text' placeholder='98********'
+           error={errors?.phone?.message}
+          id='phonenumber' name='number' register={register}/>
 
          {/* Button */}
          <Button
