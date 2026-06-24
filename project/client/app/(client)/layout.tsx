@@ -10,7 +10,7 @@ const Layout = ({
   return (
     <main className='h-full w-full'>
       
-      <section className='min-h-[80vh] px-20 pt-1'>
+      <section className='min-h-[80vh] px-10 pt-1'>
         {children}
       </section>
       <div>

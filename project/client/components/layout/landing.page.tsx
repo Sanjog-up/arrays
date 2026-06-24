@@ -46,20 +46,20 @@ export default function LandingPage() {
 
   return (
     <div
-      className="relative h-170 w-170"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="relative h-270 w-screen bg- bg-black"
+      // onMouseEnter={() => setIsHovered(true)}
+      // onMouseLeave={() => setIsHovered(false)}
     >
       <Image
-        src="/images/front.webp"
+        src="/images/new.webp"
         alt="Hero front"
         fill
-        className={`object-cover transition-opacity duration-300 ${
+        className={`object-cover w-l transition-opacity duration-300 ${
           isHovered ? "opacity-0" : "opacity-100"
         }`}
         priority
       />
-      <Image
+      {/* <Image
         src="/images/back.webp"
         alt="Hero back"
         fill
@@ -67,7 +67,7 @@ export default function LandingPage() {
           isHovered ? "opacity-100" : "opacity-0"
         }`}
         priority
-      />
+      /> */}
 
       <div className="relative z-10 flex h-full items-center justify-center">
         {/* your content on top of the image */}

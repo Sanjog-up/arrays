@@ -1,7 +1,7 @@
 import React from 'react'
 import PageTitle from '@/components/admin/page-title'
 
-const Brands = () => {
+const Orders = () => {
   return (
     <main className='h-full'>
       <PageTitle
@@ -13,4 +13,4 @@ const Brands = () => {
   )
 }
 
-export default Brands
+export default Orders

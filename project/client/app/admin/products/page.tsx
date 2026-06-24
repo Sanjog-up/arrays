@@ -1,16 +1,16 @@
 import React from 'react'
 import PageTitle from '@/components/admin/page-title'
 
-const Brands = () => {
+const AdminProdusctsPage = () => {
   return (
     <main className='h-full'>
       <PageTitle
       title='All Users'
       linkText='Dashboard'
       link='/admin'
-      />
-    </main>
+      />  
+     </main> 
   )
 }
 
-export default Brands
+export default AdminProdusctsPage
