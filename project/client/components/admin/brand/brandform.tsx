@@ -5,6 +5,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import AdminListCard from '../list-card'
 import Button from '@/components/common/ui/button'
+import ImageInput from '@/components/common/ui/image-input'
 
 const BrandForm = () => {
     const {register, formState: { errors } }  = useForm({
@@ -37,11 +38,14 @@ const BrandForm = () => {
         id={'description'}
         placeholder='Describe your brand [at least 25 chars]'
         register={register}
-        required/>
+        required
+        multiline={true}
+        />
 
-        {/* image inout */}
-        {/* <input
-        type="file" */}
+        <ImageInput
+        label='logo'
+        id='brand_logo'
+        />
 
 
         <div>
