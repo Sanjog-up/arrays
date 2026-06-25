@@ -1,14 +1,15 @@
 import React from 'react'
 import PageTitle from '@/components/admin/page-title'
-
+import BrandList from '@/components/admin/brand/list'
 const Brands = () => {
   return (
     <main className='h-full'>
       <PageTitle
-      title='All Users'
-      linkText='Dashboard'
-      link='/admin'
+      title='All Brands'
+      linkText='Add new'
+      link='/admin/brands/create'
       />
+      <BrandList/>
     </main>
   )
 }

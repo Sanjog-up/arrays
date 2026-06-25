@@ -3,8 +3,10 @@ import PageTitle from '@/components/admin/page-title'
 const Page = () => {
   return (
     <main>
-      Dashboard
-      <PageTitle/>
+      <PageTitle
+      title='Dashboard'
+      linkText='View Orders'
+      link='/admin/orders'/>
     </main>
   )
 }

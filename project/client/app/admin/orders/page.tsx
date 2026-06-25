@@ -5,7 +5,7 @@ const Orders = () => {
   return (
     <main className='h-full'>
       <PageTitle
-      title='All Users'
+      title='All Orders'
       linkText='Dashboard'
       link='/admin'
       />
