@@ -19,9 +19,9 @@ const BrandForm = () => {
   return (
     <AdminListCard>
     <div>
-      <h4 className='text-[18px] font-semibold text-black/80 my-4'>Brand Form</h4>
+      <h4 className='text-[18px] font-semibold text-black/80 my-8'>Brand Form</h4>
 
-      <form className='max-w-120 mx-auto flex gap-4 flex-col border border-gray-200 px-4 py-8 rounded-md'>
+      <form className='max-w-120 mx-auto flex gap-4 flex-col border border-gray-200 px-4 py-10 rounded-md'>
         <Input
         label='Name'
         name='name'
@@ -40,14 +40,14 @@ const BrandForm = () => {
         register={register}
         required
         multiline={true}
+        
         />
 
         <ImageInput
         label='logo'
         id='brand_logo'
+        
         />
-
-
         <div>
         <Button
         label='Submit'
