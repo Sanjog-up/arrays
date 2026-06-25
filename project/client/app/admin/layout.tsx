@@ -11,13 +11,14 @@ const Layout = (
 }>
 ) => {
   return (
-    <main className='h-screen flex '>
-      
-        <Sidebar/>
+    <main className='h-screen flex max-h-screen w-full overflow-clip'>
+      <Sidebar/>
         <section className='w-full h-full'>
             <AdminHeader/>
-            {children}
-        </section>
+            <section className='py-4 px-2 h-full overflow-auto'>
+              {children}
+            </section>
+            </section>
     </main>
   )
 }

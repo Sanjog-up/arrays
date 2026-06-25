@@ -5,9 +5,9 @@ const ProdusctIdPage = () => {
   return (
     <main  className='h-full'>
       <PageTitle
-      title='All Users'
-      linkText='Dashboard'
-      link='/admin'
+      title='All Products'
+      linkText='Products'
+      link='/admin/products'
       />
   
     </main>

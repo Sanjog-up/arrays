@@ -5,7 +5,7 @@ const AdminProdusctsPage = () => {
   return (
     <main className='h-full'>
       <PageTitle
-      title='All Users'
+      title='All Products'
       linkText='Dashboard'
       link='/admin'
       />  

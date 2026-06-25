@@ -1,9 +1,14 @@
-
 'use client'
+
 import Link from 'next/link'
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa";
 import { usePathname } from 'next/navigation';
+import { AiOutlineProduct } from "react-icons/ai";
+import { BiSolidCategoryAlt } from "react-icons/bi";
+import { GiLoincloth } from "react-icons/gi";
+import { FcPaid } from "react-icons/fc";
+
 const links=[
     {
         link:'/admin',
@@ -14,17 +19,17 @@ const links=[
     {
         link:'/admin/brands',
         label:'Brands',
-        icon:<RiDashboardHorizontalFill  size={26}/>
+        icon:<GiLoincloth  size={26}/>
     },
     {
          link:'/admin/categories',
         label:'Categories',
-        icon:<RiDashboardHorizontalFill  size={26}/>
+        icon:<BiSolidCategoryAlt  size={26}/>
     },
     {
          link:'/admin/products',
         label:'Products',
-        icon:<RiDashboardHorizontalFill  size={26}/>
+        icon:<AiOutlineProduct  size={26}/>
     },{
          link:'/admin/users',
         label:'users',
@@ -33,7 +38,7 @@ const links=[
     {
          link:'/admin/orders',
         label:'Orders',
-        icon:<RiDashboardHorizontalFill  size={26}/>
+        icon:<FcPaid  size={26}/>
     }
 ]
 
