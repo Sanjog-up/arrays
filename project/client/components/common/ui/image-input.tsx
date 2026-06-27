@@ -38,13 +38,14 @@ const ImageInput = ({ multiple = false, label, required=false, id }:IProps) => {
       {/* onClick{()=> {inputRef?.current?.click()}} */}
       <p><small>Only single file allowed</small></p>
       <input
-      // ref={inputRef}
+      ref={inputRef}
       type='file'
       className='cursor-pointer opacity-0 absolute inset-0 w-full h-full'
       multiple={multiple}
       // onChange={handleChange}
       onChange={onChange}
-    /> {preview && <div className='h-20'>
+    /> 
+    {preview && <div className='h-20'>
       {preview && <div className='h-20 w-20 rounded-sm'>
         <Image
         src={preview}

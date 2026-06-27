@@ -56,7 +56,8 @@ const BrandForm = () => {
             multiline={true}
           />
 
-          <ImageInput label="logo" id="brand_logo" />
+          <ImageInput  label="logo" id="brand_logo"
+           />
           <div>
             <Button label="Submit" type="submit" />
           </div>
