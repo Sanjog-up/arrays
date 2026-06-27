@@ -1,7 +1,5 @@
 "use client";
 import Input from "@/components/common/ui/input";
-import { register } from "module";
-import React from "react";
 import { useForm } from "react-hook-form";
 import AdminListCard from "../list-card";
 import Button from "@/components/common/ui/button";
