@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import React, { ChangeEvent, useRef, useState } from 'react'
-import { LuAsterisk } from 'react-icons/lu'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { LuAsterisk, LuX } from 'react-icons/lu'
 
 interface IProps{
     multiple?: boolean
@@ -10,31 +10,46 @@ interface IProps{
 }
 
 const ImageInput = ({ multiple = false, label, required=false, id }:IProps) => {
-  const inputRef = useRef<any>(null)
-  const [preview, setPriview] = useState<string | null>();
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [preview, setPreview] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(false)
 
   // const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
   //   const file = e.target.files;
   //   console.log(e.target.files);
-  const onChange = (e:ChangeEvent<HTMLInputElement, HTMLInputElement>)=> {
-    if(!e.target.files){
+  const onChange = (e:ChangeEvent<HTMLInputElement>)=> {
+    if(!e.target.files)
       return
+      const files = Array.from(e.target.files)
+      if(preview) URL.revokeObjectURL(preview)
+        setPreview(URL.createObjectURL(files[0]))
     }
   
-    const files = Array.from(e.target.files)
-    setPriview(URL.createObjectURL(files[0]))
-  }
+    const handleRemove = (e: React.MouseEvent) => {
+      e.stopPropagation()
+      if(preview) URL.revokeObjectURL(preview)
+        setPreview(null)
+      setIsOpen(false)
+      if(inputRef.current) inputRef.current.value = ''
+    }
+  
 
+
+    useEffect(()=>{
+      if(!isOpen) return
+      const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setIsOpen(false)
+      window.addEventListener("keydown", onKey)
+      return () => window.removeEventListener("keydown", onKey)
+    }, [isOpen])
   return (
     <div>
-      
-   
     <div className={'flex'}>
       
         <label  htmlFor={id} className='text-[14px]'>{label}</label>
         {required && <LuAsterisk className='text-indigo-500'/>}
     </div>
-    <div className='relative border cursor-pointer border-dashed border-blue-500 h-40 rounded-md py-3 px-2'>Drag and drop or click to upload
+
+    <div className=' relative border cursor-pointer border-dashed border-blue-500 h-40 rounded-md py-3 px-2'>Drag and drop or click to upload
       {/* onClick{()=> {inputRef?.current?.click()}} */}
       <p><small>Only single file allowed</small></p>
       <input
@@ -45,22 +60,59 @@ const ImageInput = ({ multiple = false, label, required=false, id }:IProps) => {
       // onChange={handleChange}
       onChange={onChange}
     /> 
-    {preview && <div className='h-20'>
-      {preview && <div className='h-20 w-20 rounded-sm'>
+
+      {preview && (
+        <div className='relative z-10 cursor-zoom-in h-20 w-20 rounded-sm'
+          onClick={(e) => {
+          e.stopPropagation()
+          setIsOpen(true)
+      }}
+      >
         <Image
         src={preview}
         alt='preview'
         width={100}
         height={100}
-        className='h-full w-full overflow-clip rounded-sm'
+        className='h-full w-full object-cover rounded-sm'
         />
-          </div>}
+        <button
+        type='button'
+        onClick={handleRemove}
+        className='absolute -top-2 -right-2 bg-black/70 text-white rounded-full w-5 h-5 flex items-center justify-center cursor-pointer'>
+          <LuX size={12}/>
+        </button>
+          </div>)}
+          
     </div>
-  
-      
-      
-       } </div>
+
+    {isOpen && preview && (
+        <div
+          className='fixed inset-0 z-50 bg-black/80 flex items-center justify-center'
+          onClick={() => setIsOpen(false)}
+        >
+          <button
+            type='button'
+            onClick={() => setIsOpen(false)}
+            className='absolute top-4 right-4 text-white cursor-pointer'
+          >
+            <LuX size={28} />
+          </button>
+          <div
+            className='relative max-w-3xl max-h-[85vh]'
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={preview}
+              alt='preview large'
+              width={800}
+              height={800}
+              className='max-h-[85vh] w-auto h-auto object-contain rounded-md'
+            />
+          </div>
         </div>
-  )}
+      )}
+    </div>
+  )
+}
 
 export default ImageInput

@@ -14,6 +14,6 @@ export const ImageSchema = yup.object({
     } )
     .test('filetype', 'Only JPG, PNG, WEBP allowed', (value)=>{
         if(!value) return true;
-        return Supported_Formats.includes(value.type);
+        return Supported_Formats.includes(value.type)
     })
 })
