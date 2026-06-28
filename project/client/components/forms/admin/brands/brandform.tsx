@@ -1,6 +1,6 @@
 "use client";
 import Input from "@/components/common/ui/input";
-import { useForm } from "react-hook-form";
+import { useController, useForm } from "react-hook-form";
 import AdminListCard from "../list-card";
 import Button from "@/components/common/ui/button";
 import ImageInput from "@/components/common/ui/image-input";
@@ -12,17 +12,21 @@ const BrandForm = () => {
   const {
     register, handleSubmit,
     formState: { errors },
+    control,
   } = useForm({
     defaultValues: {
       name: "",
       description: "",
       logo: undefined,
-      
     },
     resolver:yupResolver(brandSchema)
   });
 
   
+  const { field, fieldState } = useController({
+    name: "logo",
+    control,
+  })
   const onSumbit = (data:TBrabdInput)=>{
     console.log(data)
   }
@@ -57,6 +61,10 @@ const BrandForm = () => {
           />
 
           <ImageInput  label="logo" id="brand_logo"
+          required
+          value={field.value}
+          onChange={field.onChange}
+          error={fieldState.error?.message}
            />
           <div>
             <Button label="Submit" type="submit" />

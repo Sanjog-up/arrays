@@ -1,4 +1,3 @@
-
 import Image from 'next/image'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { LuAsterisk, LuX } from 'react-icons/lu'
@@ -8,13 +7,14 @@ interface IProps{
     label:string
     required?: boolean
     id:string
-    value?: File | string | null
+    value?: File | string | undefined | File[]
     onChange: (file: File | null) => void
     error?: string
     accept?: string
 }
 
-const ImageInput = ({ multiple = false, label, required=false, id, value, onChange }:IProps) => {
+const ImageInput = ({ multiple = false, label, required=false, id, value, onChange  , error, accept
+ }:IProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [preview, setPreview] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false)
@@ -26,17 +26,32 @@ const ImageInput = ({ multiple = false, label, required=false, id, value, onChan
     if(!e.target.files || e.target.files.length === 0)
       return
       const file = e.target.files[0]
-      if(preview) URL.revokeObjectURL(preview)
-        setPreview(URL.createObjectURL(file))
+      // if(preview) URL.revokeObjectURL(preview)
+      //   setPreview(URL.createObjectURL(file))
       onChange(file)
     }
   
+    useEffect(()=>{
+      if(typeof value === 'string'){
+        setPreview(value)
+      }else if(value instanceof File){
+        const url = URL.createObjectURL(value)
+        setPreview(url)
+        return ()=> URL.revokeObjectURL(url)
+      }else{
+        setPreview(null)
+      }
+    }, [value])
+
+
+
     const handleRemove = (e: React.MouseEvent) => {
       e.stopPropagation()
       if(preview) URL.revokeObjectURL(preview)
         setPreview(null)
       setIsOpen(false)
       if(inputRef.current) inputRef.current.value = ''
+      onChange(null)
     }
   
 
@@ -65,7 +80,9 @@ const ImageInput = ({ multiple = false, label, required=false, id, value, onChan
       multiple={multiple}
       // onChange={handleChange}
       onChange={onHandleChange}
-    /> 
+      accept={accept}
+      /> 
+    {error && <p className='text-red-500 text-xs mt-1'>{error}</p>}
 
       {preview && (
         <div className='relative z-10 cursor-default h-20 w-20 rounded-sm'
@@ -79,6 +96,7 @@ const ImageInput = ({ multiple = false, label, required=false, id, value, onChan
         alt='preview'
         width={100}
         height={100}
+        unoptimized
         className='h-full w-full object-cover rounded-sm'
         />
         <button
@@ -112,6 +130,7 @@ const ImageInput = ({ multiple = false, label, required=false, id, value, onChan
               alt='preview large'
               width={800}
               height={800}
+              unoptimized
               className='max-h-[85vh] w-auto h-auto object-contain rounded-md'
             />
           </div>
