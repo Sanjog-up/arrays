@@ -1,3 +1,4 @@
+
 import Image from 'next/image'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { LuAsterisk, LuX } from 'react-icons/lu'
@@ -7,9 +8,13 @@ interface IProps{
     label:string
     required?: boolean
     id:string
+    value?: File | string | null
+    onChange: (file: File | null) => void
+    error?: string
+    accept?: string
 }
 
-const ImageInput = ({ multiple = false, label, required=false, id }:IProps) => {
+const ImageInput = ({ multiple = false, label, required=false, id, value, onChange }:IProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [preview, setPreview] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false)
@@ -17,12 +22,13 @@ const ImageInput = ({ multiple = false, label, required=false, id }:IProps) => {
   // const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
   //   const file = e.target.files;
   //   console.log(e.target.files);
-  const onChange = (e:ChangeEvent<HTMLInputElement>)=> {
-    if(!e.target.files)
+  const onHandleChange = (e:ChangeEvent<HTMLInputElement>)=> {
+    if(!e.target.files || e.target.files.length === 0)
       return
-      const files = Array.from(e.target.files)
+      const file = e.target.files[0]
       if(preview) URL.revokeObjectURL(preview)
-        setPreview(URL.createObjectURL(files[0]))
+        setPreview(URL.createObjectURL(file))
+      onChange(file)
     }
   
     const handleRemove = (e: React.MouseEvent) => {
@@ -58,11 +64,11 @@ const ImageInput = ({ multiple = false, label, required=false, id }:IProps) => {
       className='cursor-pointer opacity-0 absolute inset-0 w-full h-full'
       multiple={multiple}
       // onChange={handleChange}
-      onChange={onChange}
+      onChange={onHandleChange}
     /> 
 
       {preview && (
-        <div className='relative z-10 cursor-zoom-in h-20 w-20 rounded-sm'
+        <div className='relative z-10 cursor-default h-20 w-20 rounded-sm'
           onClick={(e) => {
           e.stopPropagation()
           setIsOpen(true)

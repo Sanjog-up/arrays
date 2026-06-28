@@ -7,6 +7,7 @@ import ImageInput from "@/components/common/ui/image-input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { brandSchema, TBrabdInput } from "@/schema/brand.schema";
 
+
 const BrandForm = () => {
   const {
     register, handleSubmit,
@@ -21,6 +22,7 @@ const BrandForm = () => {
     resolver:yupResolver(brandSchema)
   });
 
+  
   const onSumbit = (data:TBrabdInput)=>{
     console.log(data)
   }
