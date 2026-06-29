@@ -11,7 +11,7 @@ export const brandSchema = yup.object({
         return  val.length >= 25;
     }),
     // .min(25, "must be 25 chars long"),
-    logo: yup.mixed<File | File[]>().required("logo is required")
+    logo: yup.mixed<File | File[]>().required("logo khai")
 });
 
 export type TBrabdInput = yup.InferType<typeof brandSchema>;

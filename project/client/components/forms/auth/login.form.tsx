@@ -7,6 +7,9 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { CgPassword } from 'react-icons/cg';
 import {LoginSchema} from '@/schema/auth.schema';
+import axios from 'axios';
+import { TLoginInput } from '@/types/auth.types';
+import { login } from '@/api/auth.api';
 
 export const LoginForm = () =>{
 
@@ -34,6 +37,15 @@ export const LoginForm = () =>{
     })
  
 
+
+    const onSubmit = async (data: TLoginInput) => {
+        try {
+            const response = await login(data)
+            console.log(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     console.log(errors)
 
     // const onEmailChange = (e: React.ChangeEvent<HTMLInputElement,HTMLInputElement>)=> {
@@ -46,10 +58,10 @@ export const LoginForm = () =>{
     //     setPassword(e.target.value)
     // }
 
-    const onSubmit = (data: {email: string;password:string}) => {
-        console.log('form data',data)
-        // http post /auth/login
-    }
+    // const onSubmit = (data: {email: string;password:string}) => {
+    //     console.log('form data',data)
+    //     // http post /auth/login
+    // }
 
   return (
     <div className='w-full'>
