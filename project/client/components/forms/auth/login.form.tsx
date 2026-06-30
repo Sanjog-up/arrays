@@ -11,6 +11,10 @@ import axios from 'axios';
 import { TLoginInput } from '@/types/auth.types';
 import { login } from '@/api/auth.api';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast'
+
+
 
 
 export const LoginForm = () =>{
@@ -29,6 +33,7 @@ export const LoginForm = () =>{
     //     setFormData({...formData, [e.target.value]: e.target.value})
     // }
 
+    const router = useRouter()
 
  const {register, handleSubmit, formState:{errors,  }} = useForm({
         defaultValues:{
@@ -44,22 +49,27 @@ export const LoginForm = () =>{
         mutationFn: login,
         onSuccess: (response) => {
             console.log('on Success', response)
+            toast.success(response?.message ?? 'Login Success!!')
+            router.replace('/')
+
         },
         onError: (error) =>
         {
             console.log('on Error', error)
+            toast.error(error?.message ?? 'Login Failed')
         }
     })
  console.log("is Pending", isPending)
 
 
     const onSubmit = async (data: TLoginInput) => {
-        try {
-            const response = await login(data)
-            console.log(response)
-        } catch (error) {
-            console.log(error)
-        }
+        mutate(data)
+        // try {
+        //     const response = await login(data)
+        //     console.log(response)
+        // } catch (error) {
+        //     console.log(error)
+        // }
     }
     console.log(errors)
 
@@ -124,7 +134,7 @@ export const LoginForm = () =>{
                     Sign In
                 </button> */}
                 <Button
-                label='Sign In'
+                label={isPending ? 'Signing In..' : 'Sign In'} 
                 type='submit'/>
                         </form>
 </div>
