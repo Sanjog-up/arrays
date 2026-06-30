@@ -10,6 +10,8 @@ import {LoginSchema} from '@/schema/auth.schema';
 import axios from 'axios';
 import { TLoginInput } from '@/types/auth.types';
 import { login } from '@/api/auth.api';
+import { useMutation } from '@tanstack/react-query';
+
 
 export const LoginForm = () =>{
 
@@ -35,7 +37,20 @@ export const LoginForm = () =>{
         },
         resolver: yupResolver(LoginSchema)
     })
- 
+
+
+    // reactquery
+    const { mutate, isPending } = useMutation({
+        mutationFn: login,
+        onSuccess: (response) => {
+            console.log('on Success', response)
+        },
+        onError: (error) =>
+        {
+            console.log('on Error', error)
+        }
+    })
+ console.log("is Pending", isPending)
 
 
     const onSubmit = async (data: TLoginInput) => {
