@@ -6,6 +6,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { TRegisterInput } from '@/types/auth.types';
+import { useMutation } from '@tanstack/react-query';
+import { register as registerUser } from '@/api/auth.api';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+
 
 // interface IRegisterInput{
 //   full_name:string,
@@ -46,6 +51,7 @@ const RegisterForm = () => {
   //         setRetypePassword(e.target.value)
   //     }
 
+  const router = useRouter();
   const { register, handleSubmit, formState:{errors} } = useForm({
     defaultValues:{
       full_name:"",
@@ -57,8 +63,24 @@ const RegisterForm = () => {
     },resolver:yupResolver(RegisterSchema)
   });
 
-      const onSubmit = (data:TRegisterInput) => {
-              console.log('form data',data)
+  // react query 
+  const { mutate, isPending } = useMutation({
+    mutationFn: registerUser,
+    onSuccess: (response) =>{
+      console.log('on Success', response)
+            toast.success(response?.message ?? 'Register Success!!')
+            router.replace('/')
+    },
+    onError: (error)=> {
+      console.log('On error', error)
+      toast.error(error?.message ?? 'Login Failed')
+    }
+  })
+  console.log('isPending', isPending)
+
+      const onSubmit = async (data:TRegisterInput) => {
+          mutate(data)     
+        // console.log('form data',data)
               // http post /auth/login
           }
 

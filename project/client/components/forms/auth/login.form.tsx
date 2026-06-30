@@ -14,12 +14,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast'
 
-
-
-
 export const LoginForm = () =>{
-
-
     // const[email,setEmail]= useState('')
     // const[password, setPassword]= useState('')
 
@@ -32,10 +27,9 @@ export const LoginForm = () =>{
     //     console.log(formData)
     //     setFormData({...formData, [e.target.value]: e.target.value})
     // }
+     const router = useRouter()
 
-    const router = useRouter()
-
- const {register, handleSubmit, formState:{errors,  }} = useForm({
+    const {register, handleSubmit, formState:{errors,  }} = useForm({
         defaultValues:{
             email: "",
             password: ""

@@ -1,10 +1,10 @@
 import axios from "axios";
-import { TLoginInput } from "@/types/auth.types";
+import { TLoginInput, TRegisterInput } from "@/types/auth.types";
 
 // login
 export const login = async (data: TLoginInput) => {
   try {
-    console.log("logib");
+    console.log("login");
     const response = await axios.post(
       "http://localhost:3001/api/v1/auth/login",
       data,
@@ -12,5 +12,21 @@ export const login = async (data: TLoginInput) => {
     return response.data;
   } catch (error: any) {
     console.log(error.response.data);
+    throw error.response.data;
   }
 };
+
+// register
+export const register = async (data: TRegisterInput) => {
+  try {
+    console.log("register");
+    const response = await axios.post(
+      "http://localhost:3001/api/v1/auth/register",
+      data,
+    )
+    return response.data
+  } catch (error:any) {
+    console.log(error.response.data);
+    throw error.response.data;
+  }
+}
