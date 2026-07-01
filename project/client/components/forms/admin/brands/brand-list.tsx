@@ -46,7 +46,7 @@ const BrandList = () => {
       cell:(info) => {
        console.log(info.row.original.name)
         return (
-          <div className="h-16 w-16 ">
+          <div className="h-16 max-w-20 mx-auto ">
             <Image
               src={info.getValue().path}
               alt={`${info.row.original.name}-logo`}

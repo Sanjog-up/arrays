@@ -31,7 +31,8 @@ const CategoryList = () => {
         updated_at: '07-01-2026',
       },
     ]
-    
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const columnHelper = createColumnHelper<any>()
     
     const columns = [
@@ -45,13 +46,13 @@ const CategoryList = () => {
         cell:(info) => {
          console.log(info.row.original.name)
           return (
-            <div className="h-16 w-16 ">
+            <div className="h-16 max-w-20 mx-auto ">
               <Image
                 src={info.getValue().path}
                 alt={`${info.row.original.name}-logo`}
                 width={100}
                 height={100}
-                className='object-contain h-full w-full'
+                className='object-contain h-full w-full '
               />  
             </div>
           )
