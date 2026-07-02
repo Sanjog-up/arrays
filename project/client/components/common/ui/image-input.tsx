@@ -18,6 +18,7 @@ const ImageInput = ({ multiple = false, label, required=false, id, value, onChan
   const inputRef = useRef<HTMLInputElement>(null)
   const [preview, setPreview] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false)
+  const previewUrl = typeof value === 'string' ? value : value instanceof File ? URL.createObjectURL(value) : null;
 
   // const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
   //   const file = e.target.files;

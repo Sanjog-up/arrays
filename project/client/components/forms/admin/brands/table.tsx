@@ -11,8 +11,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 
-
-
 type IProps = {
     data:any[]
     columns:any[]
