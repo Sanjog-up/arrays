@@ -36,11 +36,13 @@ const ProductList = () => {
       const columnHelper = createColumnHelper<any>()
       
       const columns = [
+
         columnHelper.accessor((row)=> row.name, {
           id:'name',
           cell:(info) => <strong><i>{info.getValue()}</i></strong>,
           header: () => <span className='text-lg'>Name</span>,
         }),
+
         columnHelper.accessor((row)=> row.logo, {
           id:'logo',
           cell:(info) => {
@@ -59,12 +61,14 @@ const ProductList = () => {
           },
           header: () => <span>Logo</span>,
         }),
+
         columnHelper.accessor((row)=> row.description, {
           id:'description',
           cell:(info) => <i>{info.getValue()}</i>,
           header: () => <span>Description</span>,
           footer: (info) => info.column.id,
         }),
+
         columnHelper.accessor((row)=> row.created_at, {
           id:'created_at',
           cell:(info) => <i>{info.getValue()}</i>,
@@ -72,7 +76,7 @@ const ProductList = () => {
           footer: (info) => info.column.id,
         }),
     
-            columnHelper.accessor((row)=> row, {
+         columnHelper.accessor((row)=> row, {
           id:'_',
           cell:(info) => <div className='flex gap-2 justify-center'>
             <CiTrash title="Delete" className='text-red-500 text-[20px] cursor-pointer'/>

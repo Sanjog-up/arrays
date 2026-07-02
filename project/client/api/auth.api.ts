@@ -1,11 +1,11 @@
-import axios from "axios";
+import api from ".";;
 import { TLoginInput, TRegisterInput } from "@/types/auth.types";
 
 // login
 export const login = async (data: TLoginInput) => {
   try {
-    console.log("login");
-    const response = await axios.post(
+    // console.log("login");
+    const response = await api.post(
       "http://localhost:3001/api/v1/auth/login",
       data,
     );
@@ -19,8 +19,8 @@ export const login = async (data: TLoginInput) => {
 // register
 export const register = async (data: TRegisterInput) => {
   try {
-    console.log("register");
-    const response = await axios.post(
+    // console.log("register");
+    const response = await api.post(
       "http://localhost:3001/api/v1/auth/register",
       data,
     )

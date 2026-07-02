@@ -6,31 +6,19 @@ import Image from "next/image";
 import { CiTrash } from "react-icons/ci";
 import { MdEditDocument } from "react-icons/md";
 import Table from "../brands/table";
+import { getAllCategories } from "@/api/category.api";
+import { useQuery } from "@tanstack/react-query";
+import ActionButtons from "@/components/common/ui/action-button";
+import { toast } from "react-hot-toast";
 
 const CategoryList = () => {
+   const {data, isLoading, isError, error} =  useQuery({
+    queryFn: getAllCategories,
+    queryKey: ['get-all-categories'],
+  })
+  console.log(data, isLoading, isError, error)
 
-    const defaultData= [
-      {
-        name: 'Category 1',
-        description: 'description category ',
-        logo:{
-          path:'/next.svg',
-          public_id:'/next.svg'
-        },
-        created_at: '07-01-2026',
-        updated_at: '07-01-2026',
-      },
-      {
-        name: 'Category 2',
-        description: 'description category ',
-        logo:{
-          path:'/next.svg',
-          public_id:'/next.svg'
-        },
-        created_at: '07-01-2026',
-        updated_at: '07-01-2026',
-      },
-    ]
+    
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const columnHelper = createColumnHelper<any>()
@@ -41,8 +29,8 @@ const CategoryList = () => {
         cell:(info) => <strong><i>{info.getValue()}</i></strong>,
         header: () => <span className='text-lg'>Name</span>,
       }),
-      columnHelper.accessor((row)=> row.logo, {
-        id:'logo',
+      columnHelper.accessor((row)=> row.image, {
+        id:'image',
         cell:(info) => {
          console.log(info.row.original.name)
           return (
@@ -57,27 +45,30 @@ const CategoryList = () => {
             </div>
           )
         },
-        header: () => <span>Logo</span>,
+        header: () => <span>Image</span>,
       }),
       columnHelper.accessor((row)=> row.description, {
         id:'description',
-        cell:(info) => <i>{info.getValue()}</i>,
+        cell:(info) => <div className="max-w-60 mx-auto text-start text-ellipsis line-clamp-3 text-wrap"><i>{info.getValue()}</i></div>,
         header: () => <span>Description</span>,
         footer: (info) => info.column.id,
       }),
-      columnHelper.accessor((row)=> row.created_at, {
-        id:'created_at',
-        cell:(info) => <i>{info.getValue()}</i>,
+      columnHelper.accessor((row)=> row.createdAt, {
+        id:'createdAt',
+        cell:(info) => <b>{new Date(info.getValue()).toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        })}</b>,
         header: () => <span>Created At</span>,
         footer: (info) => info.column.id,
       }),
   
           columnHelper.accessor((row)=> row, {
         id:'_',
-        cell:(info) => <div className='flex gap-2 justify-center'>
-          <CiTrash title="Delete" className='text-red-500 text-[20px] cursor-pointer'/>
-          <MdEditDocument title="Edit" className='text-blue-500 text-[20px] cursor-pointer'/>
-        </div>,
+        cell:(info) => <ActionButtons editLink={`/admin/categories/edit/${info.row.original.id}`} onDelete={() => { toast.success(`category:${info.row.original.name} deleted`)}}/>,
         header: () => <span>Actions</span>,
      
       }),
@@ -91,7 +82,7 @@ const CategoryList = () => {
       </h4>
       <div className= 'w-full h-full rounded-sm'>
         <Table
-          data={defaultData}
+          data={data?.data ?? []}
           columns={columns}
         />
       </div>
