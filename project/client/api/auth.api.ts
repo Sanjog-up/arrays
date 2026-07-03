@@ -6,7 +6,7 @@ export const login = async (data: TLoginInput) => {
   try {
     // console.log("login");
     const response = await api.post(
-      "http://localhost:3001/api/v1/auth/login",
+      "/auth/login",
       data,
     );
     return response.data;
