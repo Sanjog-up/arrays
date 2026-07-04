@@ -1,32 +1,40 @@
+"use client";
 
-  "use client";
-
-
-import  {useState}  from "react";
 import Image from "next/image";
 
 export default function LandingPage() {
-  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
-      className="relative h-270 w-screen k" >
+    <section
+      className="relative w-full  overflow-hidden "
+      style={{ height: '145vh'}}>
       <Image
         src="/images/new.webp"
         alt="Hero front"
         fill
-        className={`object-cover w-l h-96"
-        }`}
+        className={"object-cover object-top"} 
+        style={{ objectPosition: "center 20%" }}
         priority
-      />
+      />  
 
+     
 
-    </div>
+      {/* Top-left text */}
+      <div className="absolute bg-black top-6 left-6 md:top-10 md:left-10">
+        <h1 className="text-white text-2xl md:text-4xl font-bold">
+          Grey Matter
+        </h1>
+      </div>
+      
+      
+      <section className="absolute bottom-9 left-7 w-full h-1/2  from-black to-transparent">
+      <div className="absolute bottom-5 right-6 md:bottom-10 md:right-10 text-right">
+        <p className="text-white text-sm md:text-lg">
+          Fashion that speaks for itself
+        </p>
+      </div>
+      </section>
+    
+    </section>
   );
 }
-      
-   
-//   );
-// }
-
-// export default LandingPage;
