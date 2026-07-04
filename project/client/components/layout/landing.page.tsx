@@ -3,38 +3,49 @@
 import Image from "next/image";
 
 export default function LandingPage() {
+return (
+<section className="relative w-full overflow-auto"
+ style={{ height: "160vh" }}>
+  <Image
+  src="/images/new.webp"
+  alt="Landing Page"
+  fill
+  className="object-cover"
+  style={{ objectPosition: "center 10%" }}
+  priority
+  />
 
-  return (
-    <section
-      className="relative w-full  overflow-hidden "
-      style={{ height: '145vh'}}>
-      <Image
-        src="/images/new.webp"
-        alt="Hero front"
-        fill
-        className={"object-cover object-top"} 
-        style={{ objectPosition: "center 20%" }}
-        priority
-      />  
+  <div 
+  style={{ 
+    position: "absolute", 
+    top: "10%", 
+    left: "12px", 
+    transform: "translateY(-50%)",
+    maxWidth: "230px",
+    padding: "16px",
+    borderRadius: "8px",
+  }}
+  >
+    <h1 style={{ color: "black", fontSize: "1.8rem", fontWeight: "bolder" }}>
+      Grey Matter
+    </h1>
+    <p style={{ color: "rgba(0,0,0,0.8)", fontSize: "1rem", fontWeight: "bold", marginTop: "8px" }}>
+      Fashion that speaks for itself
+    </p>
+  </div>
 
-     
+  <div
+  style={{
+    position: "absolute",
+    bottom: "700px",
+    right: "24px",
+    textAlign: "right",
+  }}
+  >
+    <p style={{ color: "black", fontSize: "1.1rem", fontWeight: "bold" }}>
+      New Arrivals — 2026
+    </p>
+  </div>
+</section>
 
-      {/* Top-left text */}
-      <div className="absolute bg-black top-6 left-6 md:top-10 md:left-10">
-        <h1 className="text-white text-2xl md:text-4xl font-bold">
-          Grey Matter
-        </h1>
-      </div>
-      
-      
-      <section className="absolute bottom-9 left-7 w-full h-1/2  from-black to-transparent">
-      <div className="absolute bottom-5 right-6 md:bottom-10 md:right-10 text-right">
-        <p className="text-white text-sm md:text-lg">
-          Fashion that speaks for itself
-        </p>
-      </div>
-      </section>
-    
-    </section>
-  );
-}
+)}
