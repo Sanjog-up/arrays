@@ -40,13 +40,20 @@ const BrandForm = ({ defaultValues, brandId }: BrandFormProps) => {
   });
 
 
-  useEffect(() => {
-    if (defaultValues) {
-      reset({
-        name: defaultValues.name,
-        description: defaultValues.description,
-        logo: defaultValues.logo,
-      });
+  // useEffect(() => {
+  //   if (defaultValues) {
+  //     reset({
+  //       name: defaultValues.name,
+  //       description: defaultValues.description,
+  //       logo: defaultValues.logo,
+  //     });
+  //   }
+  // }, [defaultValues, reset]);
+
+
+  useEffect(() => { 
+    if(defaultValues) {
+      reset(defaultValues);
     }
   }, [defaultValues, reset]);
   

@@ -2,26 +2,25 @@
 
 import BrandForm from "@/components/forms/admin/brands/brandform";
 import PageTitle from "@/components/forms/admin/page-title";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-import React from "react";
+import { getBrandById } from "@/api/brand.api"; 
 
 const EditBrandPage = () => {
   const { id } = useParams<{id: string}>();
 
   const { data: brand, isLoading, error } = useQuery({
      queryKey: ["brand", id],
-    queryFn: async () => {
-      const response = await axios.get(`/brands/${id}`);
-      return response.data;
-    },
+    queryFn: () => getBrandById(id as string),
+     enabled: !!id && id!== "undefined", 
   });
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
+  if (error) {
+    return <div>Error: {error instanceof Error ? error.message : "An error occurred"}</div>;
+  }
 
 
   return (
@@ -31,7 +30,7 @@ const EditBrandPage = () => {
         linkText="Go Back"
         link="/admin/brands"
       />
-      <BrandForm defaultValues={brand} brandId={id} />
+      <BrandForm defaultValues={brand?.data} brandId={id} />
     </main>
   );
 };
