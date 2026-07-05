@@ -1,9 +1,21 @@
-
+'use client'
 
 import Link from "next/link";
-
+import { useState } from "react";
 
 const Header = () => {
+  const [isMenDropdownOpen, setIsMenDropdownOpen] = useState(false);
+
+
+  const onMouseEnter = () => {
+    setIsMenDropdownOpen(true);
+  };
+
+  const onMouseLeave = () => {
+    setIsMenDropdownOpen(false);
+  };
+  if(isMenDropdownOpen ? useState(true) : useState(false) )
+  
   return (
     <header className="sticky  top-0 z-50 border-b border-zinc-200 bg-white">
         <nav className="flex items-center justify-between px-6 py-4 rounded-sm hover:bg-blue-100 transition-colors">
@@ -24,23 +36,31 @@ const Header = () => {
             Contact Us
             </Link>
 
-            <section className = "relative group">
-            <p className="italic font-serif font-semibold text-blue-800 px-2 py-2 cursor-pointer hover:bg-blue-200 rounded-xl">
-              Men
-              </p>
+            <section 
+            onMouseEnter={onMouseEnter} 
+            onMouseLeave={onMouseLeave} 
+            className = "relative">
+            <ol className="italic font-serif font-semibold text-blue-800 px-2 py-2 cursor-pointer hover:bg-blue-200 rounded-xl">
+              Categories
+              </ol>
 
-            <div className="absolute left-0 top-full  bg-white border border-zinc-200 shadow-lg rounded-xl min-w-40 py-2 z-50">
-            <Link href="/men/t-shirts" className="block px-4 py-2 text-sm font-serif text-blue-800 hover:bg-zinc-100 whitespace-nowrap">
-            T-Shirts
+            {isMenDropdownOpen &&(
+            <div className="absolute left-0 top-full bg-white border border-zinc-200 shadow-lg rounded-xl  py-2 z-50">
+            <Link href="/men/t-shirts" 
+            className="block px-4 py-2 w-3xl text-sm font-serif text-blue-800 hover:bg-zinc-100 whitespace-nowrap">
+            <li >T-Shirts</li>
           </Link>
-          <Link href="/men/jackets" className="block px-4 py-2 text-sm font-serif text-blue-800 hover:bg-zinc-100">
-            Jackets
+          <Link href="/men/jackets" 
+          className="block px-4 py-2 text-sm font-serif text-blue-800 hover:bg-zinc-100">
+            <li>Jackets</li>
           </Link>
           <Link href="/men/pants" className="block px-4 py-2 text-sm font-serif text-blue-800 hover:bg-zinc-100">
-            Pants
+            <li>Pants</li>
           </Link>
           </div>
+          )}
             </section>
+            
           </section>
 
           <Link href={"/auth/login"}
