@@ -68,7 +68,7 @@ const CategoryList = () => {
   
           columnHelper.accessor((row)=> row, {
         id:'_',
-        cell:(info) => <ActionButtons editLink={`/admin/categories/edit/${info.row.original.id}`} onDelete={() => { toast.success(`category:${info.row.original.name} deleted`)}}/>,
+        cell:(info) => <ActionButtons editLink={`/admin/categories/edit/${info.row.original._id}`} onDelete={() => { toast.success(`category:${info.row.original.name} deleted`)}}/>,
         header: () => <span>Actions</span>,
      
       }),

@@ -1,71 +1,125 @@
-// "use client";
-// import Input from "@/components/common/ui/input";
-// import { register } from "module";
-// import React from "react";
-// import { useForm } from "react-hook-form";
-// import AdminListCard from "@/components/forms/admin/list-card";
-// import Button from "@/components/common/ui/button";
-// import ImageInput from "@/components/common/ui/image-input";
+"use client";
+import Input from "@/components/common/ui/input";
+import React, { useEffect } from "react";
+import { useForm, useController } from "react-hook-form";
+import AdminListCard from "@/components/forms/admin/list-card";
+import Button from "@/components/common/ui/button";
+import ImageInput from "@/components/common/ui/image-input";
+import { categorySchema, TCategoryInput  } from "@/schema/category.scgema";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/navigation";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
-// const CategoryForm = () => {
-//   const {
-//     register,
-//     formState: { errors },
-//   } = useForm({
-//     defaultValues: {
-//       name: "",
-//       description: "",
-//       logo: null,
-//       category: "",
-//     },
-//   });
-//   return (
-//     <AdminListCard>
-//       <div>
-//         <h4 className="text-[18px] font-semibold text-black/80 my-8">
-//           Category Form
-//         </h4>
 
-//         <form className="max-w-120 mx-auto flex gap-4 flex-col border border-gray-200 px-4 py-10 rounded-md">
-//           <Input
-//             label="Name"
-//             name="name"
-//             type="text"
-//             id={"name"}
-//             placeholder="Caliber"
-//             register={register}
-//             required
-//           />
-//           {/* <Input
-//         label='Descrption'
-//         name='description'
-//         type='text'
-//         id={'description'}
-//         placeholder='Describe your brand [at least 25 chars]'
-//         register={register}
-//         required
-//         multiline={true}
-        
-//         /> */}
+interface CaegoryFormProps {
+  defaultValues?: TCategoryInput;
+  categoryId?: string;
+}
 
-//           <Input
-//             label="Category"
-//             name="category"
-//             type="text"
-//             id={"category"}
-//             placeholder="categorize your product"
-//             register={register}
-//             required
-//             multiline={false}
-//           />
+const CategoryForm = ({ defaultValues, categoryId}: CaegoryFormProps) => {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const isEditMode = Boolean(categoryId);
 
-//           <ImageInput label="product" id="products_category" />
-//           <div>
-//             <Button label="Submit" type="submit" />
-//           </div>
-//         </form>
-//       </div>
-//     </AdminListCard>
-//   );
-// };
-// export default CategoryForm;
+  const {
+    register,
+    reset,
+    formState: { errors },
+    handleSubmit,
+    control
+  } = useForm<TCategoryInput>({
+    resolver: yupResolver(categorySchema),
+    defaultValues: {
+      name: defaultValues?.name ?? "",
+      logo: defaultValues?.logo ?? undefined,
+      category: defaultValues?.category ?? "",
+    },
+  });
+
+  useEffect(()=> {
+    if(defaultValues){
+      reset(defaultValues)
+    }
+  }, [defaultValues, reset])
+
+   const { field, fieldState } = useController({
+    name: "logo",
+    control,
+  })
+
+  const mutation = useMutation({
+    mutationFn: async (formData: FormData) => {
+      if (isEditMode) {
+        return axios.patch(`/categories/${categoryId}`, formData);
+      }
+      return axios.post("/categories", formData);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["categories"] });
+      router.push("/admin/categories");
+    },
+  });
+
+
+  const onSumbit = (data:TCategoryInput)=>{
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("category", data.category);
+    if (data.logo instanceof File) {
+      formData.append("logo", data.logo);
+    }
+    mutation.mutate(formData);
+    console.log(data)
+  }
+
+  return (
+    <AdminListCard>
+      <div>
+        <h4 className="text-[18px] font-semibold text-black/80 my-8">
+          Category Form
+        </h4>
+
+        <form 
+        onSubmit={handleSubmit(onSumbit)}
+        className="max-w-120 mx-auto flex gap-4 flex-col border border-gray-200 px-4 py-10 rounded-md">
+          <Input
+            label="Name"
+            name="name"
+            type="text"
+            id={"name"}
+            placeholder="Caliber"
+            register={register}
+            error={errors.name?.message}
+            required
+          />
+
+          <Input
+            label="Category"
+            name="category"
+            type="text"
+            id={"category"}
+            placeholder="categorize your product"
+            register={register}
+            required
+            error={errors.name?.message}
+            multiline={false}
+          />
+
+          <ImageInput
+          label="product" 
+          id="products_category" 
+          value={field.value}
+          onChange={field.onChange}
+          error={fieldState.error?.message}/>
+          <div>
+
+            <Button label="Submit" type="submit"
+            isLoading= {mutation.isPending} />
+          </div>
+        </form>
+      </div>
+    </AdminListCard>
+  );
+};
+export default CategoryForm;
