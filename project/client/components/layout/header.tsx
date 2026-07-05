@@ -14,7 +14,6 @@ const Header = () => {
   const onMouseLeave = () => {
     setIsMenDropdownOpen(false);
   };
-  if(isMenDropdownOpen ? useState(true) : useState(false) )
   
   return (
     <header className="sticky  top-0 z-50 border-b border-zinc-200 bg-white">
@@ -45,19 +44,30 @@ const Header = () => {
               </ol>
 
             {isMenDropdownOpen &&(
-            <div className="absolute left-0 top-full bg-white border border-zinc-200 shadow-lg rounded-xl  py-2 z-50">
+            <ul
+            style={{
+              listStylePosition: "inside",
+              minWidth: "200px",
+              padding: "12px 20px"
+            }}
+           className="absolute left-0 top-full bg-white border border-zinc-200 shadow-lg rounded-xl  py-2 z-50"
+           >
+            <li style={{ padding: "8px 0"}}>
             <Link href="/men/t-shirts" 
             className="block px-4 py-2 w-3xl text-sm font-serif text-blue-800 hover:bg-zinc-100 whitespace-nowrap">
-            <li >T-Shirts</li>
+            T-Shirts
           </Link>
+          </li>
+          <li style={{ padding: "8px 0"}}>
           <Link href="/men/jackets" 
           className="block px-4 py-2 text-sm font-serif text-blue-800 hover:bg-zinc-100">
-            <li>Jackets</li>
+            Jackets
           </Link>
+          </li>
           <Link href="/men/pants" className="block px-4 py-2 text-sm font-serif text-blue-800 hover:bg-zinc-100">
             <li>Pants</li>
           </Link>
-          </div>
+          </ul>
           )}
             </section>
             

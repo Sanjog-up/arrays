@@ -17,13 +17,14 @@ const EditCategoryPage = () => {
      enabled: !!id && id!== "undefined", 
   });
 console.log("Fetched category:", category);
+console.log("submit clicked")
   if (isLoading) {
     return <div>Loading...</div>;
   }
   if (error) {
     return <div>Error: {error instanceof Error ? error.message : "An error occurred"}</div>;
   }
-
+console.log("form errors:", error);
 
   return (
     <main className="h-full">

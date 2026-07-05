@@ -9,7 +9,7 @@ import { brandSchema, TBrabdInput } from "@/schema/brand.schema";
 import { useRouter } from "next/navigation";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
-import axios from "axios";
+import api from "@/api";
 
 interface BrandFormProps {
   defaultValues?: TBrabdInput;
@@ -65,9 +65,9 @@ const BrandForm = ({ defaultValues, brandId }: BrandFormProps) => {
   const mutation = useMutation({
     mutationFn: async (formData: FormData) => {
       if (isEditMode) {
-        return axios.patch(`/brands/${brandId}`, formData);
+        return api.patch(`/brands/${brandId}`, formData);
       }
-      return axios.post("/brands", formData);
+      return api.post("/brands", formData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["brands"] });
@@ -81,7 +81,7 @@ const BrandForm = ({ defaultValues, brandId }: BrandFormProps) => {
     formData.append("name", data.name);
     formData.append("description", data.description ?? "");
     if (data.logo instanceof File) {
-      formData.append("logo", data.logo);
+      formData.append("brand_logo", data.logo);
     }
     mutation.mutate(formData);
     console.log(data)
