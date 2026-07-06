@@ -1,3 +1,4 @@
+import CategorySection from "@/components/category-section";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import LandingPage from "@/components/layout/landing.page";
@@ -8,6 +9,7 @@ export default function Home() {
     <main className="min-h-screen w-full ">
       <Header/>
       <LandingPage/>
+      <CategorySection/>
       {/* hero section */}
       {/* Our category */}
       {/* featured products */}

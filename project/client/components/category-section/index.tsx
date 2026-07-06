@@ -1,0 +1,27 @@
+import React from 'react'
+import { FaChevronDown } from 'react-icons/fa6';
+const CategorySection = () => {
+  return (
+    <div className='mt-10 py-3 bg-gray-50'>
+        {/* heading section */}
+        <div className='flex justify-between px-20'>
+        {/*  left section */}
+            <div className='flex justify-between'>
+                <h2 className='text-xl font-bold text-gray-600 tracking-wider'>All Categories</h2>
+                <p className='text-sm font-normal text-gray-600 '> Explore all categories</p>
+            </div>
+            <div className='flex gap-1 items-center cursor-pointer'>
+                <span> explore all</span>
+                <FaChevronDown/>
+            </div>
+            {/* right section */}
+        </div>
+        {/* card */}
+        <div>
+            
+        </div>
+    </div>
+  )
+}
+
+export default CategorySection
