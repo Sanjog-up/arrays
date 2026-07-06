@@ -8,8 +8,9 @@ export const categorySchema = yup.object({
     category: yup
     .string()
     .required(),
-    logo: yup
-    .mixed<File | File[]>()
+
+    image: yup
+    .mixed<File | string>()
     .required("logo khai")
     .test('filesize', 'File must be under 5mb', (value) => {
         if(!value) return true;

@@ -75,7 +75,6 @@ const BrandForm = ({ defaultValues, brandId }: BrandFormProps) => {
     },
   });
 
-
   const onSumbit = (data:TBrabdInput)=>{
     const formData = new FormData();
     formData.append("name", data.name);
@@ -123,7 +122,8 @@ const BrandForm = ({ defaultValues, brandId }: BrandFormProps) => {
           required={!isEditMode}
            />
           <div>
-            <Button label={mutation.isPending ? "Saving.." : "Submit"} type="submit" />
+            <Button label={mutation.isPending ? "Saving.." : "Submit"} 
+            type="submit" />
           </div>
         </form>
       </div>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
   const [isMenDropdownOpen, setIsMenDropdownOpen] = useState(false);
@@ -16,29 +17,38 @@ const Header = () => {
   };
   
   return (
+    
     <header className="sticky  top-0 z-50 border-b border-zinc-200 bg-white">
-        <nav className="flex items-center justify-between px-6 py-4 rounded-sm hover:bg-blue-100 transition-colors">
+        <nav className="flex items-center justify-between px-6 py-4 rounded-sm hover:bg-blue-100 transition-colors gap-4">
             
-            <Link href={"/"} className="whitespace-nowrap text-xl font-serif">Grey Matter </Link>  
+            <Link href={"/"} 
+            className="whitespace-nowrap text-xl shrink-0 font-serif">Grey Matter </Link>  
 
-            <section className="flex items-center gap-3">
-            <Link href={"/"} className='italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-200 rounded-xl whitespace-nowrap' >
+            <section className="flex items-center gap-2 overflow-x-auto scrollbar-hide min-w-0">
+            <Link href={"/"} 
+            className='italic font-serif font-semibold text-blue-800 px-2 py-2 hover:bg-blue-200 rounded-xl whitespace-nowrap shrink-0' >
             Home
             </Link>
-            <Link href={"/products"} className="italic font-semibold font-serif text-blue-800 px-2 py-2 hover:bg-blue-200 rounded-xl">
+
+            <Link href={"/products"} 
+            className="italic font-semibold font-serif text-blue-800 px-2 py-2 hover:bg-blue-200 rounded-xl shrink-0">
             Products
             </Link>
-            <Link href={"/about"} className="italic font-serif font-semibold text-blue-800 px-2 py-2  hover:bg-blue-200 rounded-xl whitespace-nowrap">
+
+            <Link href={"/about"} 
+            className="italic font-serif font-semibold text-blue-800 px-2 py-2 shrink-0 hover:bg-blue-200 rounded-xl whitespace-nowrap">
             About Us
             </Link>
-            <Link href={"/contact"} className="italic font-serif font-semibold text-blue-800 px-2 py-2  hover:bg-blue-200 rounded-xl whitespace-nowrap">
+
+            <Link href={"/contact"} 
+            className="italic font-serif shrink-0 font-semibold text-blue-800 px-2 py-2  hover:bg-blue-200 rounded-xl whitespace-nowrap">
             Contact Us
             </Link>
 
             <section 
             onMouseEnter={onMouseEnter} 
             onMouseLeave={onMouseLeave} 
-            className = "relative">
+            className = "relative shrink-0">
             <ol className="italic font-serif font-semibold text-blue-800 px-2 py-2 cursor-pointer hover:bg-blue-200 rounded-xl">
               Categories
               </ol>
@@ -64,18 +74,21 @@ const Header = () => {
             Jackets
           </Link>
           </li>
+          <li style={{ padding: "8px 0"}}>
           <Link href="/men/pants" className="block px-4 py-2 text-sm font-serif text-blue-800 hover:bg-zinc-100">
-            <li>Pants</li>
+            Pants
           </Link>
+          </li>
           </ul>
           )}
+          
             </section>
-            
+          
           </section>
-
-          <Link href={"/auth/login"}
-          className=" bg-blue-400 text-amber-50 font-serif px-5 py-2 rounded-lg whitespace-nowrap">
+<Link href={"/auth/login"}
+          className="flex justify-center items-center bg-blue-400 text-amber-50 font-serif px-5 py-2 rounded-lg whitespace-nowrap shrink-0">
             Login</Link>
+          
         </nav>
 </header>
     

@@ -9,15 +9,14 @@ import { categorySchema, TCategoryInput  } from "@/schema/category.scgema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import api from "@/api";
 
-
-interface CaegoryFormProps {
-  defaultValues?: TCategoryInput;
+interface CategoryFormProps {
+  defaultValues?: TCategoryInput & { image?: {path: string; public_id:string}};
   categoryId?: string;
 }
 
-const CategoryForm = ({ defaultValues, categoryId}: CaegoryFormProps) => {
+const CategoryForm = ({ defaultValues,categoryId}: CategoryFormProps) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   const isEditMode = Boolean(categoryId);
@@ -27,33 +26,36 @@ const CategoryForm = ({ defaultValues, categoryId}: CaegoryFormProps) => {
     reset,
     formState: { errors },
     handleSubmit,
-    control
+    control,
   } = useForm<TCategoryInput>({
     resolver: yupResolver(categorySchema),
     defaultValues: {
       name: defaultValues?.name ?? "",
-      logo: defaultValues?.logo ?? undefined,
+      image: defaultValues?.image?.path ?? undefined,
       category: defaultValues?.category ?? "",
     },
   });
+  console.log(errors)
 
   useEffect(()=> {
     if(defaultValues){
-      reset(defaultValues)
+      reset({
+        ...defaultValues,
+      image: defaultValues.image?.path})
     }
   }, [defaultValues, reset])
 
    const { field, fieldState } = useController({
-    name: "logo",
+    name: "image",
     control,
   })
 
   const mutation = useMutation({
     mutationFn: async (formData: FormData) => {
       if (isEditMode) {
-        return axios.patch(`/categories/${categoryId}`, formData);
+        return api.patch(`/categories/${categoryId}`, formData);
       }
-      return axios.post("/categories", formData);
+      return api.post("/categories", formData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["categories"] });
@@ -65,9 +67,9 @@ const CategoryForm = ({ defaultValues, categoryId}: CaegoryFormProps) => {
   const onSumbit = (data:TCategoryInput)=>{
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("category", data.category);
-    if (data.logo instanceof File) {
-      formData.append("logo", data.logo);
+    formData.append("category", data.category ?? "");
+    if (data.image instanceof File) {
+      formData.append("image", data.image);
     }
     mutation.mutate(formData);
     console.log(data)
@@ -77,7 +79,7 @@ const CategoryForm = ({ defaultValues, categoryId}: CaegoryFormProps) => {
     <AdminListCard>
       <div>
         <h4 className="text-[18px] font-semibold text-black/80 my-8">
-          Category Form
+          {isEditMode ? "Edit Category" : "Category Form"}
         </h4>
 
         <form 
@@ -102,7 +104,7 @@ const CategoryForm = ({ defaultValues, categoryId}: CaegoryFormProps) => {
             placeholder="categorize your product"
             register={register}
             required
-            error={errors.name?.message}
+            error={errors.category?.message}
             multiline={false}
           />
 
@@ -111,10 +113,13 @@ const CategoryForm = ({ defaultValues, categoryId}: CaegoryFormProps) => {
           id="products_category" 
           value={field.value}
           onChange={field.onChange}
-          error={fieldState.error?.message}/>
+          error={fieldState.error?.message}
+          required={!isEditMode}/>
           <div>
 
-            <Button label="Submit" type="submit"
+            <Button 
+            label={mutation.isPending ? "Saving..." : "Submit"}
+            type="submit"
             isLoading= {mutation.isPending} />
           </div>
         </form>

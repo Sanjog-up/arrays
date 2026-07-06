@@ -1,9 +1,4 @@
 'use client'
-import * as React from 'react'
-// import ReactDOM from 'react-dom/client'
-
-// import './index.css'
-
 import {
   createColumnHelper,
   flexRender,
@@ -73,7 +68,7 @@ function Table({data, columns}:IProps) {
           ))}
         </tfoot> */}
       </table>
-      <div className="h-4" />
+      
       {/* <button onClick={() => rerender()} className="border p-2">
         Rerender
       </button> */}
