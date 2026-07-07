@@ -1,8 +1,9 @@
 import React from 'react'
 import { FaChevronDown } from 'react-icons/fa6';
+import CategoryList from './list';
 const CategorySection = () => {
   return (
-    <div className='mt-10 py-3 bg-gray-50'>
+    <div className='pt-10 py-3 bg-gray-50'>
         {/* heading section */}
         <div className='flex justify-between px-20'>
         {/*  left section */}
@@ -15,10 +16,10 @@ const CategorySection = () => {
                 <FaChevronDown/>
             </div>
             {/* right section */}
-        </div>
+        </div >
         {/* card */}
-        <div>
-            
+        <div className='mt-4'>
+            <CategoryList/>
         </div>
     </div>
   )

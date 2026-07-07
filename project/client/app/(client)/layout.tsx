@@ -1,4 +1,4 @@
-import Header from '@/components/layout/header'
+import Header from '@/components/layout/header';
 import React from 'react'
 
 const Layout = ({
@@ -9,7 +9,7 @@ const Layout = ({
     
   return (
     <main className='h-full w-full'>
-      
+      <Header/>
       <section className='min-h-[80vh] px-10 pt-1'>
         {children}
       </section>
