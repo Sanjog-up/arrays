@@ -6,6 +6,7 @@ type IImage= {
 }
 
 export type TCategory = {
+    _id:string;
     name: string;
     category: string;
     description?: string;
