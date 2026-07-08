@@ -1,7 +1,10 @@
 import React from 'react'
 import { FaChevronDown } from 'react-icons/fa6';
-import CategoryList from './list';
+import CategoryList from '@/components/forms/admin/categories/category-list';
+
+
 const CategorySection = () => {
+   
   return (
     <div className='pt-10 py-3 bg-gray-50'>
         {/* heading section */}
@@ -17,12 +20,11 @@ const CategorySection = () => {
             </div>
             {/* right section */}
         </div >
-        {/* card */}
         <div className='mt-4'>
             <CategoryList/>
         </div>
+        
     </div>
   )
 }
-
 export default CategorySection

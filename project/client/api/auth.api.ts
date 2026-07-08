@@ -30,3 +30,14 @@ export const register = async (data: TRegisterInput) => {
     throw error.response.data;
   }
 }
+
+// get profile
+export const getProfile = async () => {
+  try {
+    const response = await api.get("/auth/me")
+    return response.data;
+  } catch (error:any) {
+    console.log(error.response.data);
+    throw error.response.data;
+  }
+}

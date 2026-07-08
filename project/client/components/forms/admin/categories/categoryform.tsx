@@ -37,13 +37,19 @@ const CategoryForm = ({ defaultValues,categoryId}: CategoryFormProps) => {
   });
   console.log(errors)
 
-  useEffect(()=> {
+  // useEffect(()=> {
+  //   if(defaultValues){
+  //     reset({
+  //       ...defaultValues,
+  //     image: defaultValues.image?.path})
+  //   }
+  // }, [defaultValues, reset])
+
+  useEffect(() => {
     if(defaultValues){
-      reset({
-        ...defaultValues,
-      image: defaultValues.image?.path})
+      reset (defaultValues)
     }
-  }, [defaultValues, reset])
+  } , [defaultValues, reset])
 
    const { field, fieldState } = useController({
     name: "image",
@@ -84,6 +90,7 @@ const CategoryForm = ({ defaultValues,categoryId}: CategoryFormProps) => {
 
         <form 
         onSubmit={handleSubmit(onSumbit)}
+        noValidate
         className="max-w-120 mx-auto flex gap-4 flex-col border border-gray-200 px-4 py-10 rounded-md">
           <Input
             label="Name"

@@ -5,16 +5,18 @@ import { TCategory } from '@/types/category.types'
 import { useQuery } from '@tanstack/react-query'
 import { getAllCategories } from '@/api/category.api'
 import { MdOutlineCloudOff } from 'react-icons/md'
-
+import { FaRegHeart } from 'react-icons/fa';
+import { HiOutlineShoppingBag } from 'react-icons/hi';
+import Link from 'next/link';
+import Image from 'next/image';
+import { IoLogOutOutline } from 'react-icons/io5';
+import { LuLogIn } from 'react-icons/lu';
 
 const CategoryList = () => {
     const {isLoading, data, error} = useQuery({
       queryFn: getAllCategories,
       queryKey: ['get-all-categories'],
     })
-    console.log(isLoading, data, error)
-    const categories = data?.data;
-
   return (
     <div className='h-full'>
 
@@ -25,14 +27,14 @@ const CategoryList = () => {
         </div>}
 
         {/* map data */}
-        {!isLoading && categories && categories.length> 0 && 
+        {!isLoading && data?.data && data?.data .length> 0 && 
         (<div className='grid grid-cols-5 gap-4'>
-          {categories.map((category: TCategory) => (<CategoryCard category={category} key={category._id}/>))}
+          {data?.data .map((category: TCategory) => (<CategoryCard category={category} key={category._id}/>))}
         </div>)}
 
         {/* notfound */}
       {
-        !isLoading && categories && categories?.length === 0
+        !isLoading && data?.data  && data?.data ?.length === 0
          && <div className='h-full w-full flex flex-col items-center justify-center'>
             <MdOutlineCloudOff className='text-indigo-300' size={38}/>
             <p className='text-gray-500 font-medium text-lg'>Categories not found</p>
@@ -55,5 +57,3 @@ const CategorySkeleton = () => {
     </div>
   )
 }
-
-export default CategoryList
