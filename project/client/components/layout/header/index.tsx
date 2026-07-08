@@ -22,64 +22,91 @@ const Navbar = () => {
         </div>
 
         {/*  links */}
-        <div className='flex gap-2 items-center'>
-            <Link className='mt-1'
-            title='WishList'
-            href={'/wishlist'}
-            >
-            <FaRegHeart className='text-red-400 ' size={24}/>
-            </Link>
-        
-            <Link className='mt-1'
-            title='Cart'
-            href={'/wishlist'}
-            >
-            <HiOutlineShoppingBag className='text-red-400 ' size={24}/>
-            </Link>
+        <div className='flex gap-3'>
+                <Link className='text-black/80 hover:text-indigo-500' href={'/'}>
+                    <span className='text-lg font-semibold text-black/80 hover:text-indigo-500 transition-all duration-300'>Home</span>
+                </Link>
+                <Link className='text-black/80 hover:text-indigo-500' href={'/products'}>
+                    <span className='text-lg font-semibold text-black/80 hover:text-indigo-500 transition-all duration-300'>Products</span>
+                </Link>
+                <Link className='text-black/80 hover:text-indigo-500' href={'/about'}>
+                    <span className='text-lg font-semibold  transition-all duration-300'>About Us</span>
+                </Link>
+                <Link className='text-black/80 hover:text-indigo-500' href={'/contact-us'}>
+                    <span className='text-lg font-semibold text-black/80 hover:text-indigo-500 transition-all duration-300'>Contact Us</span>
+                </Link>
             </div>
-    </nav>
-    
-        
 
             {/* auth & cart */}
-            {isAuth ? <AuthUser /> : <div className='flex gap-2 items-center'>
-                <Link className='flex items-center' href={'/auth/login'}>
-                <div className='text-white font-bold bg-indigo-400 flex items-center gap-1 p-1 px-3 py-2 hover:bg-indigo-300 transition-all duration-300'>
-                    <LuLogIn/>
-                    <p>Login</p>
-                </div>
+            {isAuth ? <AuthUser/> : <AuthButtons/>}
+
+
+        
+    </nav>
+  )}
+
+  const AuthUser = () => {
+    return (
+        <div className='flex items-center gap-3'>
+
+            <div className='flex gap-2 items-center'>
+                <Link className='mt-1' title='WishList' href={'/wishlist'}>
+                <FaRegHeart className='text-indigo-500' size={24}/>
                 </Link>
-                </div>}
+
+                <Link title='Cart' href={'/cart'}>
+                <HiOutlineShoppingBag/>
+                </Link>
+            </div>
 
 
-
-export const AuthUser = () => {
-    <div>
-                {/* profileImage */}
-                <div className=''>
+            {/* auth */}
+            <div className='flex gap-2 items-center'>
+                {/* profile image */}
+                <div className='h-14 aspect-square rounded-full overflow-clip p-0.5 border border-indigo-200'>
                     <Image
                     src={'/asap.webp'}
-                    alt='profile_image'
+                    alt='profile-image'
                     height={200}
                     width={200}
                     loading='lazy'
-                    className='h-full w-full rounded-full object-cover object-left'
+                    className='h-full w-full rounded-full'
                     />
                 </div>
+            
+
                 <div>
-                    {/* name  */}
-                    <p className='text-lg font-normal rounded '>John Doe</p>
+                {/* name */}
+                    <p className='text-lg font-semibold italic text-gray-700'>John Doe</p>
                     {/* logout */}
-                    <div className='cursor-pointer text-red-300'>
+                    <div className='cursor-pointer  text-red-500 flex gap-1 items-center -mt-1'>
                         <IoLogOutOutline size={22} />
-                        <p className='text-sm '>Logout</p>
+                        <p className='text-sm'>Logout</p>
                     </div>
                 </div>
             </div>
-}
-      
+        </div>
+    )
+  }
     
-  )
+
+const AuthButtons = () => {
+    return (
+        <div className='flex gap-2 items-center'>
+            <Link className='flex items-center ' href={'/auth/login'}>
+                <div className='text-white font-bold hover:bg-indigo-600 transition-all duration-300 bg-indigo-500 flex items-center gap-1 py-2 px-3 border border-indigo-500 rounded '>
+                    <LuLogIn size={22} />
+                    <p>Login</p>
+                </div>
+            </Link>
+            <Link className='flex items-center ' href={'/auth/register'}>
+                <div className='text-indigo-500 font-bold  transition-all duration-300 flex items-center gap-1 py-2 px-3 border border-indigo-500 rounded '>
+                    <MdOutlineAccountCircle size={26} />
+                    <p>Register</p>
+                </div>
+            </Link>
+        </div>
+    )
 }
 
 export default Navbar
