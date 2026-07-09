@@ -1,4 +1,5 @@
 import Header from '@/components/layout/header';
+import Navbar from '@/components/layout/header/index';
 import React from 'react'
 
 const Layout = ({
@@ -9,7 +10,7 @@ const Layout = ({
     
   return (
     <main className='h-full w-full'>
-      <Header/>
+      <Navbar/>
       <section className='min-h-[80vh] px-10 pt-1'>
         {children}
       </section>
