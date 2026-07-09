@@ -5,12 +5,6 @@ import { TCategory } from '@/types/category.types'
 import { useQuery } from '@tanstack/react-query'
 import { getAllCategories } from '@/api/category.api'
 import { MdOutlineCloudOff } from 'react-icons/md'
-import { FaRegHeart } from 'react-icons/fa';
-import { HiOutlineShoppingBag } from 'react-icons/hi';
-import Link from 'next/link';
-import Image from 'next/image';
-import { IoLogOutOutline } from 'react-icons/io5';
-import { LuLogIn } from 'react-icons/lu';
 
 const CategoryList = () => {
     const {isLoading, data, error} = useQuery({

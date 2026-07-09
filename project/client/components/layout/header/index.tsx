@@ -1,15 +1,18 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { use } from 'react'
 import Link from 'next/link'
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { FaRegHeart } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
 import { LuLogIn } from "react-icons/lu";
 import { MdOutlineAccountCircle } from "react-icons/md";
+import { useAuth } from '@/hooks/auth.hook';
+import { IUser } from '@/context/auth.context';
 
 const Navbar = () => {
 
-    const isAuth= true
+    const { isAuthenticated, isLoading, logout, user} = useAuth()
+    console.log(isAuthenticated, isLoading, logout, user)
   return (
     <nav className='flex justify-between h-18 py-2 px-20 items-center shadow-sm shadow-indigo-200'>
         <div>
@@ -38,14 +41,15 @@ const Navbar = () => {
             </div>
 
             {/* auth & cart */}
-            {isAuth ? <AuthUser/> : <AuthButtons/>}
+            {isAuthenticated ? <AuthUser user= {user} isLoading= {isLoading} logout={logout} /> : <AuthButtons/>}
 
 
         
     </nav>
   )}
 
-  const AuthUser = () => {
+  const AuthUser = ({ user, isLoading, logout}:{user:IUser | null ;isLoading: boolean; logout : () => void
+  }) => {
     return (
         <div className='flex items-center gap-3'>
 
@@ -65,7 +69,7 @@ const Navbar = () => {
                 {/* profile image */}
                 <div className='h-14 aspect-square rounded-full overflow-clip p-0.5 border border-indigo-200'>
                     <Image
-                    src={'/asap.webp'}
+                    src={user?.profile_image? user?.profile_image.path : "/asap.webp"}
                     alt='profile-image'
                     height={200}
                     width={200}
@@ -79,7 +83,8 @@ const Navbar = () => {
                 {/* name */}
                     <p className='text-lg font-semibold italic text-gray-700'>John Doe</p>
                     {/* logout */}
-                    <div className='cursor-pointer  text-red-500 flex gap-1 items-center -mt-1'>
+                    <div onClick={logout} 
+                    className='cursor-pointer  text-red-500 flex gap-1 items-center -mt-1'>
                         <IoLogOutOutline size={22} />
                         <p className='text-sm'>Logout</p>
                     </div>

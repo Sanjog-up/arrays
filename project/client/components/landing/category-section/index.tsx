@@ -8,7 +8,7 @@ const CategorySection = () => {
   return (
     <div className='pt-10 py-3 bg-gray-50'>
         {/* heading section */}
-        <div className='flex justify-between px-20'>
+        <div className='flex justify-between px-10'>
         {/*  left section */}
             <div className='flex justify-between'>
                 <h2 className='text-xl font-bold text-gray-600 tracking-wider'>All Categories</h2>
