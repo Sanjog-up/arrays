@@ -6,12 +6,9 @@ import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
   const [isMenDropdownOpen, setIsMenDropdownOpen] = useState(false);
-
-
   const onMouseEnter = () => {
     setIsMenDropdownOpen(true);
   };
-
   const onMouseLeave = () => {
     setIsMenDropdownOpen(false);
   };

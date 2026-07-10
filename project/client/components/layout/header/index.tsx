@@ -14,7 +14,7 @@ const Navbar = () => {
   const { isAuthenticated, isLoading, logout, user } = useAuth();
   console.log(isAuthenticated, isLoading, logout, user);
   return (
-    <nav className="flex justify-between h-18 py-2 px-20 items-center shadow-sm shadow-indigo-200">
+    <nav className="flex justify-between h-18 py-2 px-15 bg-amber-50 items-center shadow-sm shadow-indigo-200">
       <div>
         <Image src={"/images/asap.webp"} alt="logo" height={100} width={100} />
       </div>

@@ -10,12 +10,12 @@ const Hero = () => {
         loading='eager'
         src={'/images/asap.webp'}
         fill
-        alt='hero imahe'
+        alt='hero image'
         className='object-cover'
         />
       </div>
       {/* overlay */}
-      <div className='absolute h-169 inset-0 bg-black/40'></div>
+      <div className='absolute  inset-0 bg-black/40'></div>
       {/* content */}
       <div className='inset-0 flex flex-col items-center justify-center text-center text-white px-6 absolute'>
         {/* heading */}

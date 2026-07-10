@@ -14,6 +14,7 @@ const CategoryList = () => {
     queryKey: ["get-all-categories"],
   });
   console.log(data, isLoading, isError, error);
+  console.log(data?.data?.[0]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const columnHelper = createColumnHelper<any>();
@@ -33,7 +34,7 @@ const CategoryList = () => {
       cell: (info) => {
         console.log(info.row.original.name);
         return (
-          <div className="h-16 max-w-20 mx-auto ">
+          <div className="h-16 w-16 rounded overflow-hidden shrink-0 mx-auto ">
             <Image
               src={info.getValue().path}
               alt={`${info.row.original.name}-logo`}
@@ -46,16 +47,18 @@ const CategoryList = () => {
       },
       header: () => <span>Image</span>,
     }),
-    columnHelper.accessor((row) => row.description, {
-      id: "description",
+    
+    columnHelper.accessor((row) => row.category, {
+      id: "category",
       cell: (info) => (
         <div className="max-w-60 mx-auto text-start text-ellipsis line-clamp-3 text-wrap">
           <i>{info.getValue()}</i>
         </div>
       ),
-      header: () => <span>Description</span>,
+      header: () => <span>Category</span>,
       footer: (info) => info.column.id,
     }),
+
     columnHelper.accessor((row) => row.createdAt, {
       id: "createdAt",
       cell: (info) => (

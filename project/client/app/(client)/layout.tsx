@@ -1,5 +1,8 @@
+'use client'
 import Header from '@/components/layout/header';
 import Navbar from '@/components/layout/header/index';
+import withAuth from '@/hoc/withAuth.hoc';
+import { Role } from '@/types/enum.types';
 import React from 'react'
 
 const Layout = ({
@@ -21,4 +24,5 @@ const Layout = ({
   )
 }
 
+const AdminLyout = withAuth(Layout, [Role.ADMIN, Role.SUPER_ADMIN])
 export default Layout
