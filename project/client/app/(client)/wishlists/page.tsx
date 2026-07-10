@@ -12,4 +12,4 @@ const WishList = () => {
 }
 
 const Page = withAuth(WishList, [Role.USER])
-export default WishList
+export default Page

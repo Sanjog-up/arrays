@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 import CategoryCard from './catefory-card'
 import { TCategory } from '@/types/category.types'
 import { useQuery } from '@tanstack/react-query'
@@ -51,3 +50,4 @@ const CategorySkeleton = () => {
     </div>
   )
 }
+export default CategoryList

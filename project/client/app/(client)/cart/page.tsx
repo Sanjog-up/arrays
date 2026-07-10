@@ -12,4 +12,4 @@ const Cart = () => {
 }
 
 const Page = withAuth(Cart, [Role.USER])
-export default Cart;
+export default Page;

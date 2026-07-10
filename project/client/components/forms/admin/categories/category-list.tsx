@@ -47,16 +47,13 @@ const CategoryList = () => {
       },
       header: () => <span>Image</span>,
     }),
-    
-    columnHelper.accessor((row) => row.category, {
-      id: "category",
-      cell: (info) => (
-        <div className="max-w-60 mx-auto text-start text-ellipsis line-clamp-3 text-wrap">
-          <i>{info.getValue()}</i>
-        </div>
-      ),
-      header: () => <span>Category</span>,
-      footer: (info) => info.column.id,
+
+    columnHelper.accessor((row) => row.description,{
+      id:"description",
+      cell:(info) => <div className="max-w-80 mx-auto text-start text-ellipsis line-clamp-3 text-wrap">
+        <i>{info.getValue()}</i>
+        </div>,
+      header: () => <span>Description</span>,
     }),
 
     columnHelper.accessor((row) => row.createdAt, {
@@ -92,7 +89,7 @@ const CategoryList = () => {
 
   return (
     <AdminListCard>
-      <h4 className="text-[18px] font-semibold text-black-500">
+      <h4 className="text-[18px]  font-semibold text-black-500">
         Category list
       </h4>
       <div className="w-full h-full rounded-sm">

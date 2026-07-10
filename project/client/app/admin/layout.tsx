@@ -14,15 +14,14 @@ const Layout = (
 }>
 ) => {
   return (
-    <main className='h-screen flex max-h-screen  w-full '>
-      {/* overflow-clip */}
+    <main className='h-screen flex max-h-screen w-full overflow-clip'>
       <Sidebar/>
         <section className='w-full h-full'>
             <AdminHeader/>
-            <section className='py-4 px-2 h-full flex-1 overflow-y-auto'>
+            <section className='py-4 px-2 h-full overflow-y-auto'>
               {children}
             </section>
-            </section>
+        </section>
     </main>
   )
 }

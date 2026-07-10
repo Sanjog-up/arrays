@@ -16,7 +16,10 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between h-18 py-2 px-15 bg-amber-50 items-center shadow-sm shadow-indigo-200">
       <div>
-        <Image src={"/images/asap.webp"} alt="logo" height={100} width={100} />
+        <Image src={"/next.svg"} 
+        alt="logo" 
+        height={100} 
+        width={100} />
       </div>
 
       {/*  links */}
@@ -85,7 +88,7 @@ const AuthUser = ({
         {/* profile image */}
         <div className="h-14 aspect-square rounded-full overflow-clip p-0.5 border border-indigo-200">
           <Image
-            src={user?.profile_image ? user?.profile_image.path : "/asap.webp"}
+            src={user?.profile_image ? user?.profile_image.path : "/images/asap.webp"}
             alt="profile-image"
             height={200}
             width={200}
