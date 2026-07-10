@@ -1,17 +1,20 @@
+'use client'
 
-import Component from "@/app/(client)/about/page";
 import { useAuth } from "@/hooks/auth.hook";
 import { Role } from "@/types/enum.types";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 
 const withAuth = (Component: React.ComponentType<any>, roles?: Role[]) => {
+    
     return function ProtectedComponent(props: any){
          console.log('withAUth')
+        
 
         const { user, isLoading} = useAuth()
         const router = useRouter()
+        console.log('roles:', roles, 'user.role:', user?.role)
 
         useEffect(() => {
             if(isLoading){
@@ -22,7 +25,7 @@ const withAuth = (Component: React.ComponentType<any>, roles?: Role[]) => {
                 router.replace('/auth/login')
                 return
             }
-            if(!isLoading && user && !roles?.includes(user.role)){
+            if(!isLoading && user && roles && roles.length > 0 &&  !roles?.includes(user.role)){
                 toast.error('Unauthorized.You cannot access this resource')
                 router.replace('/')
                 return
@@ -41,6 +44,8 @@ const withAuth = (Component: React.ComponentType<any>, roles?: Role[]) => {
             if(!isLoading && user && !roles?.includes(user.role)){
                 return null
             }
+
+            return <Component {...props}/>;
     }
 }
 export default withAuth

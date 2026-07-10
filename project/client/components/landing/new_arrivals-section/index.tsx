@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaChevronDown } from "react-icons/fa6";
-import CategoryList from './list';
+import CategoryList from '../category-section/list';
 const NewArrivals = () => {
     return (
         <div className='mt-10 py-4 bg-gray-50 min-h-60 px-20 '>

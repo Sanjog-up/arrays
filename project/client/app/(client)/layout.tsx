@@ -23,6 +23,4 @@ const Layout = ({
     </main>
   )
 }
-
-const AdminLyout = withAuth(Layout, [Role.ADMIN, Role.SUPER_ADMIN])
 export default Layout
